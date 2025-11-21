@@ -574,6 +574,15 @@ body{
     font-size: 14px;
     font-weight: 600;
 }
+/* Style untuk gambar dosen */
+.dosen-image-real {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
 .dosen-card h4 {
     font-size: 16px;
     margin: 0;
@@ -910,7 +919,7 @@ body{
       transform: translateX(-50%) translateY(30px) scale(0.85);
       opacity: 0.7;
   }
-  
+   
   /* Mobile Hover States */
   .card:nth-child(3):hover { transform: translateX(-50%) translateY(-20px) scale(1.1); }
   .card:nth-child(2):hover { transform: translateX(-50%) translateY(-5px) scale(0.95); }
@@ -1223,7 +1232,7 @@ body{
 </div>
 
 <div id="home" class="page active">
-  
+   
   <div class="landing-section">
       <div class="landing-content">
           <div class="logo-mark" style="width: 60px; height: 60px; margin: 0 auto 20px; font-size: 24px;">PZ</div>
@@ -1247,7 +1256,7 @@ body{
                        S 450 250, 500 150 
                        C 550 50, 650 50, 700 150
                        S 850 250, 900 150" />
-              
+               
               <path class="roadmap-dashed-outline" 
                     d="M 100 150 
                        C 150 50, 250 50, 300 150 
@@ -1257,7 +1266,7 @@ body{
 
               <polygon class="arrowhead" points="900,150 915,140 915,160" />
           </svg>
-          
+           
           <div class="road-step-wrapper">
             <div class="road-icon" data-page="promed-nav"><i class="fas fa-info"></i></div>
             <div class="step active" data-page="promed-nav">Tentang Promed & Peminatan</div>
@@ -1381,11 +1390,11 @@ body{
 <div id="fasilitas" class="page">
     <div class="facility-card">
         <h2>Fasilitas Produksi Media</h2>
-        
+         
         <div class="facility-image-placeholder">
             [Area untuk Foto 360°]
         </div>
-        
+         
         <p>
             **POLAR LAB** (Laboratorium Produksi Media dan Teaching Factory) adalah laboratorium milik Program Studi Produksi Media yang berfungsi sebagai pusat penelitian dan produksi media, sekaligus sebagai *teaching factory* untuk mendukung pengembangan bakat, minat, dan pembelajaran mahasiswa di berbagai bidang, seperti *game development*, animasi, jurnalisme digital, dan produksi media lainnya.
         </p>
@@ -1403,7 +1412,7 @@ body{
             <div class="calendar-title" id="monthYearTitle"></div>
             <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
         </div>
-        
+         
         <div class="calendar-grid">
             <div class="calendar-day-name">Sen</div>
             <div class="calendar-day-name">Sel</div>
@@ -1413,7 +1422,7 @@ body{
             <div class="calendar-day-name">Sab</div>
             <div class="calendar-day-name">Min</div>
         </div>
-        
+         
         <div class="calendar-grid" id="calendarDates">
             </div>
 
@@ -1431,13 +1440,13 @@ body{
     <button class="step" data-page="calendar" style="margin-top: 0; align-self: flex-start;">Kembali ke Kalender</button>
     <div class="detail-card">
         <h2 id="detailTitle">Judul Acara</h2>
-        
+         
         <div class="detail-info">
             <p><strong>Tanggal</strong>: <span id="detailDate"></span></p>
             <p><strong>Tempat</strong>: <span id="detailPlace"></span></p>
             <p><strong>Penyelenggara</strong>: <span id="detailOrganizer"></span></p>
         </div>
-        
+         
         <div class="detail-description">
             <p id="detailDescription"></p>
             <p>Info lebih lanjut: <a href="#" id="detailIgLink" target="_blank"><i class="fab fa-instagram"></i> <span id="detailIgName"></span></a></p>
@@ -1448,7 +1457,7 @@ body{
 <div id="karya" class="page">
     <h2>Galeri Karya</h2>
     <p>Film pendek, animasi, dan game edukatif karya mahasiswa.</p>
-    
+     
     <div class="work-filter-tabs">
         <div class="tab-button active" data-filter="all" id="allTab"><i class="fas fa-layer-group"></i> Semua</div>
         <div class="tab-button" data-filter="game" id="gameTab"><i class="fas fa-gamepad"></i> Game</div>
@@ -1463,22 +1472,22 @@ body{
 
         <button class="nav-arrow right" id="scrollRight"><i class="fas fa-chevron-right"></i></button>
     </div>
-    
+     
     <button class="step" data-page="home">Kembali ke Home</button>
 </div>
 
 <div id="work-detail" class="page">
     <div class="detail-card">
         <h2 id="workDetailTitle">Judul Karya</h2>
-        
+         
         <div id="workMediaContainer" class="media-container">
             </div>
-        
+         
         <div class="detail-info">
             <p><strong>Kategori</strong>: <span id="workDetailCategory"></span></p>
             <p><strong>Status</strong>: <span id="workDetailStatus"></span></p>
         </div>
-        
+         
         <div class="detail-description">
             <p id="workDetailDescription"></p>
         </div>
@@ -1510,7 +1519,7 @@ function returnToRoadmap() {
 
 function navigateToPage(targetPage, itemId = null) {
     pages.forEach(p => p.classList.remove("active"));
-    
+     
     // Stop media playback saat pindah halaman
     stopMediaPlayback();
 
@@ -1525,7 +1534,7 @@ function navigateToPage(targetPage, itemId = null) {
     } else if (targetPage === 'work-detail' && itemId) {
         showWorkDetail(itemId);
     }
-    
+     
     if (targetPage === 'promed-peminatan-detail') {
         renderPeminatanListDetail();
     }
@@ -1537,7 +1546,7 @@ function navigateToPage(targetPage, itemId = null) {
     const roadmapContainer = document.getElementById('heroRoadmap');
     if (roadmapContainer) {
         document.querySelectorAll('#heroRoadmap .step').forEach(b => b.classList.remove("active"));
-        
+         
         const promedNavPages = ['promed-nav', 'promed-about-detail', 'promed-peminatan-detail', 'peminatan-single-detail-temp'];
         const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
 
@@ -1574,7 +1583,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigateToPage(this.dataset.page);
         });
     });
-    
+     
     // INITIALIZE HOME ACTIVE STATE
     const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
     if (promedNavButton) {
@@ -1621,7 +1630,7 @@ function renderPeminatanListDetail() {
     const container = document.getElementById('peminatanList');
     if (!container) return;
     container.innerHTML = '';
-    
+     
     peminatanData.forEach((peminatan) => {
         const itemBox = document.createElement('div');
         itemBox.classList.add('peminatan-item-box');
@@ -1689,15 +1698,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // DATA DOSEN
+// --- PERUBAHAN DI SINI: MENAMBAHKAN PROPERTI 'image' ---
 const dosenData = [
-    { name: "Ngurah Rangga Wisesa, .", position: "Kepala Program Studi Produksi Media", ig: "ranggawisesa", igLink: "https://www.instagram.com/ranggawisesa", linkedin: "dr-rangga-w-2906189b", linkedinLink: "https://www.linkedin.com/in/dr-rangga-w-2906189b" },
+    { name: "Ngurah Rangga Wisesa, .", image:"", position: "Kepala Program Studi Produksi Media", ig: "ranggawisesa", igLink: "https://www.instagram.com/ranggawisesa", linkedin: "dr-rangga-w-2906189b", linkedinLink: "https://www.linkedin.com/in/dr-rangga-w-2906189b" },
     { name: "Dr. Achmad Istamar", position: "Country Head-Indonesia at Google Customer Solutions", ig: "achmadistamar", igLink: "https://www.instagram.com/achmadistamar", linkedin: "istamar", linkedinLink: "https://www.linkedin.com/in/istamar" },
     { name: "Sheila Timothy", position: "Produser Film", ig: "lalatimothy", igLink: "https://www.instagram.com/lalatimothy", linkedin: "sheila-timothy", linkedinLink: "https://www.linkedin.com/in/sheila-timothy" },
-    { name: "Dian Paramita Sastrowardoyo, M.M.", position: "Aktris, Produser, Sutradara Film", ig: "therealdisastr", igLink: "https://www.instagram.com/therealdisastr", linkedin: null, linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo" }, 
+    
+    // --- FOTO DIAN SASTRO DIMASUKKAN DI SINI ---
+    { 
+        name: "Dian Paramita Sastrowardoyo, M.M.", 
+        position: "Aktris, Produser, Sutradara Film", 
+        ig: "therealdisastr", 
+        igLink: "https://www.instagram.com/therealdisastr", 
+        linkedin: null, 
+        linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo",
+        image: "fotodosen.jpg/24451816-7f74-4c26-a57a-af6d73d787ee.JPG" 
+    }, 
+    // -------------------------------------------
+
     { name: "Alif Keenan Ibrahim, M.A.", position: "Content Strategy & Analytics at Vidio", ig: "alif.keenan", igLink: "https://www.instagram.com/alif.keenan", linkedin: "alif-ibrahim", linkedinLink: "https://www.linkedin.com/in/alif-ibrahim" },
     { name: "Hendrika Gaudens Refwalu, M.M.", position: "Marketing Lead Microsoft Indonesia", ig: "densi_refwalu", igLink: "https://www.instagram.com/densi_refwalu", linkedin: "densirefwalu", linkedinLink: "https://www.linkedin.com/in/densirefwalu" },
     { name: "Wafa Taftazani, MBA", position: "UpBanx, VCGamers, RANSVERSE", ig: "wafataftazani", igLink: "https://www.instagram.com/wafataftazani", linkedin: "wafataftazani", linkedinLink: "https://www.linkedin.com/in/wafataftazani" },
-    { name: "Svida S.P. Alisjahbana, MBA", position: "GCM MEDIA GROUP", ig: "svidss", igLink: "https://www.instagram.com/svidss", linkedin: "svidaalisjahbana", linkedinLink: "https://www.linkedin.com/in/svidaalisjahbana" },
+    { name: "Svida S.P. Alisjahbana, MBA", image:"fotodosen.jpg/dd4d6e7f-49bd-48d6-a548-fbdd96238ef4.JPG",position: "GCM MEDIA GROUP", ig: "svidss", igLink: "https://www.instagram.com/svidss", linkedin: "svidaalisjahbana", linkedinLink: "https://www.linkedin.com/in/svidaalisjahbana" },
     { name: "Gabriel Chemin, MBA", position: "General Project Manager Spotify", ig: "gabechemin", igLink: "https://www.instagram.com/gabechemin", linkedin: "gabrielchemin", linkedinLink: "https://www.linkedin.com/in/gabrielchemin" },
     { name: "Dr. Eunice Sari", position: "CX INSIGHT", ig: "eunicesari", igLink: "https://www.instagram.com/eunicesari", linkedin: "dr-eunice-sari", linkedinLink: "https://www.linkedin.com/in/dr-eunice-sari" },
     { name: "Arief Suditomo, MA", position: "News Director & Editor in Chief Metro TV", ig: "ariefsuditomo", igLink: "https://www.instagram.com/ariefsuditomo", linkedin: "ariefsuditomo", linkedinLink: "https://www.linkedin.com/in/ariefsuditomo" },
@@ -1727,8 +1749,18 @@ function renderDosenGrid() {
             socialLinks += `<a href="${dosen.linkedinLink}" target="_blank"><i class="fab fa-linkedin"></i></a>`;
         }
 
+        // --- PERUBAHAN DI SINI: MENGECEK APAKAH ADA GAMBAR ---
+        let imageHTML = '';
+        if (dosen.image) {
+            // Jika ada foto, tampilkan img tag
+            imageHTML = `<img src="${dosen.image}" alt="${dosen.name}" class="dosen-image-real">`;
+        } else {
+            // Jika tidak ada, tampilkan placeholder
+            imageHTML = `<div class="dosen-image-placeholder">[Foto Dosen ${index + 1}]</div>`;
+        }
+
         card.innerHTML = `
-            <div class="dosen-image-placeholder">[Foto Dosen ${index + 1}]</div>
+            ${imageHTML}
             <h4>${dosen.name}</h4>
             <p class="dosen-expertise">${dosen.position}</p>
             <div class="dosen-social-links">${socialLinks}</div>
@@ -1762,8 +1794,13 @@ function renderDosenArch() {
         const item = document.createElement('div');
         item.classList.add('arch-item');
         
-        // Image placeholder inside the card
-        item.innerHTML = `<img src="https://via.placeholder.com/120x160" alt="${dosen.name}" draggable="false">`; 
+        // --- PERUBAHAN DI SINI: MENGGUNAKAN GAMBAR JIKA ADA ---
+        let imgSrc = "https://via.placeholder.com/120x160"; // Default placeholder
+        if (dosen.image) {
+            imgSrc = dosen.image;
+        }
+        
+        item.innerHTML = `<img src="${imgSrc}" alt="${dosen.name}" draggable="false">`; 
         item.title = dosen.name;
         
         // Add click to scroll
@@ -1897,14 +1934,14 @@ let currentFilter = 'all';
 function renderWorksList(filter = 'all') {
     worksList.innerHTML = '';
     const filteredData = worksData.filter(work => filter === 'all' || work.type === filter);
-    
+     
     if (filteredData.length === 0) {
         worksList.innerHTML = '<p style="color:var(--muted); text-align:center; width:100%;">Tidak ada karya dalam kategori ini.</p>';
         scrollLeftBtn.style.display = 'none';
         scrollRightBtn.style.display = 'none';
         return;
     }
-    
+     
     scrollLeftBtn.style.display = 'block';
     scrollRightBtn.style.display = 'block';
 
@@ -2141,5 +2178,5 @@ nextMonthBtn.addEventListener('click', () => {
 });
 renderCalendar(currentMonthIndex);
 </script>
-</body> 
+</body>  
 </html>
