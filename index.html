@@ -444,13 +444,96 @@ body{
 }
 
 /* Dosen */
-#dosen h2 {
-    color: var(--text-dark);
-    margin-bottom: 10px;
+#dosen {
+    padding: 0; /* Remove padding to handle sections better */
 }
-#dosen p {
-    color: var(--muted);
-    margin-bottom: 30px;
+/* NEW: Arch/Semi-Circle Section (Refined Design) */
+.dosen-arch-wrapper {
+    width: 100%;
+    height: 100vh; /* Full screen feel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #0b0d14; /* Very dark bg from reference */
+    color: white;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+.dosen-arch-wrapper h2 {
+    font-family: "Bricolage Grotesque";
+    font-size: 48px;
+    margin-bottom: 10px;
+    z-index: 10;
+    text-align: center;
+}
+.dosen-arch-wrapper p {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+    z-index: 10;
+    font-size: 16px;
+    text-align: center;
+    max-width: 600px;
+}
+.arch-scene {
+    width: 100%;
+    height: 500px; /* Enough height for arch */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+/* The specific rectangular card style for the arch */
+.arch-item {
+    position: absolute;
+    width: 120px; /* Portrait rectangle width */
+    height: 160px; /* Portrait rectangle height */
+    border-radius: 16px; /* Rounded corners */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s;
+    overflow: hidden;
+    background: #222;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    will-change: transform, left, top;
+}
+/* Pop-up on hover */
+.arch-item:hover {
+    transform: scale(1.5) !important; /* Scale up significantly */
+    z-index: 999 !important; /* Bring to front */
+    box-shadow: 0 20px 50px rgba(22, 82, 255, 0.6);
+    border-color: var(--accent);
+}
+.arch-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Prevent img drag interfering */
+}
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+    font-size: 24px;
+    cursor: pointer;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+/* Existing Dosen Grid Section */
+.dosen-grid-wrapper {
+    padding: 80px 20px;
+    width: 100%;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .dosen-grid {
     display: grid;
@@ -472,6 +555,7 @@ body{
     display: flex;
     flex-direction: column;
     height: 100%;
+    scroll-margin-top: 100px; /* Spacing for smooth scroll */
 }
 .dosen-card:hover {
     transform: translateY(-5px);
@@ -1277,11 +1361,21 @@ body{
     </div>
 
 <div id="dosen" class="page">
-    <h2>Profil Dosen</h2>
-    <p>Dosen Produksi Media UI berpengalaman di industri kreatif dan digital.</p>
-    <div class="dosen-grid" id="dosenGrid">
-        </div>
-    <button class="step" data-page="home" style="margin-top: 40px;">Kembali ke Home</button>
+    <div class="dosen-arch-wrapper">
+        <h2>Meet cur Team</h2>
+        <p>A diverse group of passionate professionals, each bringing unique skills.</p>
+        <div class="arch-scene" id="dosen-arch-scene">
+            </div>
+        <div class="scroll-indicator" onclick="document.getElementById('dosenGrid').scrollIntoView({behavior:'smooth'})"><i class="fas fa-chevron-down"></i></div>
+    </div>
+
+    <div class="dosen-grid-wrapper">
+        <h2>Profil Dosen</h2>
+        <p>Dosen Produksi Media UI berpengalaman di industri kreatif dan digital.</p>
+        <div class="dosen-grid" id="dosenGrid">
+            </div>
+        <button class="step" data-page="home" style="margin-top: 40px;">Kembali ke Home</button>
+    </div>
 </div>
 
 <div id="fasilitas" class="page">
@@ -1613,6 +1707,8 @@ const dosenData = [
 ];
 
 const dosenGridContainer = document.getElementById('dosenGrid');
+const dosenArchContainer = document.getElementById('dosen-arch-scene');
+
 function renderDosenGrid() {
     if (!dosenGridContainer) return;
     dosenGridContainer.innerHTML = '';
@@ -1621,6 +1717,7 @@ function renderDosenGrid() {
     dosenData.forEach((dosen, index) => {
         const card = document.createElement('div');
         card.classList.add('dosen-card');
+        card.id = 'dosen-card-' + index; // ID for scrolling target
         
         let socialLinks = '';
         if (dosen.igLink) {
@@ -1638,6 +1735,137 @@ function renderDosenGrid() {
         `;
         dosenGridContainer.appendChild(card);
     });
+    
+    // Render the Animated Arch
+    renderDosenArch();
+}
+
+// --- NEW ANIMATED ARCH LOGIC ---
+let archAnimationId;
+let archIsPaused = false;
+let currentArchOffset = 0; // Angle offset for animation
+
+function renderDosenArch() {
+    if (!dosenArchContainer) return;
+    dosenArchContainer.innerHTML = '';
+    
+    // Stop any previous animation loop to avoid duplicates
+    if(archAnimationId) cancelAnimationFrame(archAnimationId);
+    
+    const total = dosenData.length;
+    const radius = 600; // Large radius for flatter arch
+    const centerX = dosenArchContainer.clientWidth / 2;
+    const centerY = 600; // Push center down to form arch at top
+    
+    // Create elements
+    dosenData.forEach((dosen, index) => {
+        const item = document.createElement('div');
+        item.classList.add('arch-item');
+        
+        // Image placeholder inside the card
+        item.innerHTML = `<img src="https://via.placeholder.com/120x160" alt="${dosen.name}" draggable="false">`; 
+        item.title = dosen.name;
+        
+        // Add click to scroll
+        item.onclick = () => {
+            const target = document.getElementById('dosen-card-' + index);
+            if(target) {
+                target.scrollIntoView({behavior: 'smooth', block: 'center'});
+                // Highlight effect
+                target.style.transition = "transform 0.3s, box-shadow 0.3s";
+                target.style.transform = "scale(1.05)";
+                target.style.boxShadow = "0 0 20px var(--accent)";
+                setTimeout(() => {
+                    target.style.transform = "scale(1)";
+                    target.style.boxShadow = "";
+                }, 1000);
+            }
+        };
+        
+        // Mouse events to pause/play
+        item.addEventListener('mouseenter', () => { archIsPaused = true; });
+        item.addEventListener('mouseleave', () => { archIsPaused = false; });
+        
+        dosenArchContainer.appendChild(item);
+    });
+    
+    // Start Animation Loop
+    animateArch();
+}
+
+function animateArch() {
+    const items = document.querySelectorAll('.arch-item');
+    const total = items.length;
+    const radius = 450; // Adjust radius for visual
+    const spread = 20; // Degrees between items
+    
+    if (!archIsPaused) {
+        // Move "Clockwise": Decrease angle
+        currentArchOffset -= 0.05; 
+    }
+    
+    items.forEach((item, index) => {
+        // Calculate base angle for this item
+        // Distribute them. 
+        // We want a continuous loop feel, but hard with limited items without cloning.
+        // Simple carousel logic:
+        
+        let angleDeg = (index * spread) + currentArchOffset;
+        
+        // Keep angle within reasonable bounds or wrap effect (advanced), 
+        // simpler: let them rotate in a large circle, hide bottom.
+        // But for a "Meet Team" arch typically items oscillate or it's a finite list.
+        // Let's make them rotate in a full circle but only show top.
+        
+        // Adjust angle so 0 is top (270deg standard math, but here let's use sin/cos directly)
+        // Let 270 deg be top.
+        
+        let theta = (angleDeg - 90) * (Math.PI / 180); // Convert to radians
+        
+        let x = Math.cos(theta) * radius;
+        let y = Math.sin(theta) * radius;
+        
+        // Rotation of the card itself to point to center? 
+        // Reference image has cards upright or slightly tilted.
+        // Let's tilt them slightly based on x position.
+        let rotateCard = x * 0.05; // Slight tilt
+        
+        // Centering logic (container center + x)
+        // Container height is 500. Center is roughly middle bottom?
+        // Let's fix center at bottom: 50% left, 100% top
+        
+        // Position relative to container center
+        // Container is flex, but items are absolute.
+        // Let center be:
+        const cX = dosenArchContainer.clientWidth / 2;
+        const cY = 500; // Push down
+        
+        // Apply positions
+        item.style.left = (cX + x - 60) + 'px'; // -60 is half width
+        item.style.top = (cY + y - 80) + 'px';  // -80 is half height
+        
+        // Z-index based on Y (lower Y = further back/top?) 
+        // Actually in arch, top items are usually front.
+        // Let's calculate opacity/scale based on Angle (near top = 270deg)
+        
+        // Normalized angle 0-360
+        let normAngle = (angleDeg % 360);
+        if (normAngle < 0) normAngle += 360;
+        
+        // Visibility check (only show top arc roughly 200 to 340)
+        // Let's hide items below "horizon"
+        if (y > 0) {
+             item.style.opacity = 0;
+             item.style.pointerEvents = 'none';
+        } else {
+             item.style.opacity = 1;
+             item.style.pointerEvents = 'auto';
+        }
+        
+        item.style.transform = `rotate(${rotateCard}deg)`;
+    });
+    
+    archAnimationId = requestAnimationFrame(animateArch);
 }
 
 
