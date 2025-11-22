@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PromedZone — Event & Info</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600&family=Bricolage+Grotesque:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&family=Bricolage+Grotesque:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
@@ -18,6 +18,9 @@
   --bg-about:#0f1e52; 
   --calendar-blue: #1652ff; 
   --neon-blue: #00fffb; 
+  /* New variable for metal theme */
+  --metal-dark: #2c2c2c;
+  --metal-light: #e6e6e6;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html { scroll-behavior: smooth; }
@@ -750,18 +753,20 @@ body{
 }
 .card-testi:hover {}
 
-/* About */
+/* About (MODIFIED POSITIONING: Reduced top padding to lift text) */
 #about {
   background:linear-gradient(135deg, var(--bg-about) 0%, #2a4cb8 40%, #3b6aff 100%);
   color:white;
-  padding:100px 20px;
+  /* UBAH PADDING DI SINI: padding atas dikurangi jadi 60px agar naik sekitar 1.5cm */
+  padding: 60px 20px 0; 
   overflow: hidden; 
   position: relative; 
-  min-height: 600px; 
+  min-height: 100vh; 
   display: flex; 
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  /* ADJUSTMENT: Align to top to separate from absolute cards at bottom */
+  justify-content: flex-start; 
 }
 #about h2{
   font-family:"Playfair Display";
@@ -778,7 +783,7 @@ body{
 }
 .slider-3d {
   position: absolute; 
-  bottom: -50px; 
+  bottom: 100px; /* Cards stay at bottom */
   width: 100%; 
   display:flex;
   justify-content:center;
@@ -790,33 +795,105 @@ body{
   padding-bottom: 50px; 
   gap: 0px; 
 }
+
+/* CARD FLIP LOGIC (HOVER) */
 .card {
   position:absolute;
   width:200px;
   height:300px;
-  background:rgba(255,255,255,0.08);
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.15);
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
   text-align:center;
   color:white;
   transform-style:preserve-3d;
-  transition:transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease, left 0.4s ease, top 0.4s ease, z-index 0.4s ease;
+  transition:transform 0.4s ease, left 0.4s ease, top 0.4s ease, z-index 0.4s ease; 
   opacity:1;
-  overflow: hidden; 
+  overflow: visible; 
   transform-origin: bottom center;
-  cursor: pointer; /* Add cursor pointer */
+  cursor: pointer;
+  perspective: 1000px;
 }
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Trigger Flip on Hover */
+.card:hover .card-inner {
+    transform: rotateY(180deg) translateY(-20px); /* Flip + Lift */
+}
+
+/* Common face styles */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
+      
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+/* Front styling */
+.card-front::before {
+    content: '';
+    position: absolute;
+    bottom: -1px; 
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(135deg, var(--bg-about), #2a4cb8, #3b6aff);
+    border-radius: 0 0 18px 18px; 
+    z-index: 20; 
+}
+
+.card-front img {
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-top:20px; 
+  margin-bottom: auto; 
+  border:3px solid rgba(255,255,255,0.6); 
+}
+.card-front h3 {margin:15px 0 8px;font-size:18px;}
+.card-front p {color:rgba(255,255,255,0.75);font-size:14px;}
+
+/* Back styling */
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #1652ff, #0f1e52);
+    color: white;
+    justify-content: center; 
+    padding: 20px;
+}
+.card-back p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Positioning Logic */
 .card:nth-child(3) { 
     left: 50%;
     transform: translateX(-50%) translateY(0) scale(1.1);
     z-index: 5;
-}
-/* Hover: Pop Up for Center Card */
-.card:nth-child(3):hover {
-    transform: translateX(-50%) translateY(-20px) scale(1.1);
-    z-index: 20;
 }
 
 .card:nth-child(2) { 
@@ -830,16 +907,6 @@ body{
     z-index: 3;
     opacity: 0.8;
 }
-/* Hover: Pop Up for Left Cards */
-.card:nth-child(2):hover {
-    transform: translateX(-50%) translateY(0px) scale(1.0);
-    z-index: 20;
-}
-.card:nth-child(1):hover {
-    transform: translateX(-50%) translateY(20px) scale(0.9);
-    z-index: 20;
-    opacity: 1;
-}
 
 .card:nth-child(4) { 
     left: 65%; 
@@ -851,90 +918,6 @@ body{
     transform: translateX(-50%) translateY(40px) scale(0.9); 
     z-index: 3;
     opacity: 0.8;
-}
-/* Hover: Pop Up for Right Cards */
-.card:nth-child(4):hover {
-    transform: translateX(-50%) translateY(0px) scale(1.0);
-    z-index: 20;
-}
-.card:nth-child(5):hover {
-    transform: translateX(-50%) translateY(20px) scale(0.9);
-    z-index: 20;
-    opacity: 1;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    bottom: -1px; 
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background: linear-gradient(135deg, var(--bg-about), #2a4cb8, #3b6aff);
-    border-radius: 0 0 18px 18px; 
-    z-index: 20; 
-}
-.card img {
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-top:20px;
-  border:3px solid rgba(255,255,255,0.6); 
-}
-.card h3{margin:15px 0 8px;font-size:18px;}
-.card p{color:rgba(255,255,255,0.75);font-size:14px;}
-@media (max-width: 768px) {
-  #about {
-    min-height: 500px;
-  }
-  .slider-3d {
-    bottom: -30px;
-    height: 350px;
-    padding-bottom: 30px;
-  }
-  .card {
-    width: 150px;
-    height: 250px;
-    border-radius: 15px;
-  }
-  .card:nth-child(3) {
-      transform: translateX(-50%) translateY(0) scale(1.1);
-  }
-  .card:nth-child(2) {
-      left: 30%; 
-      transform: translateX(-50%) translateY(15px) scale(0.95);
-  }
-  .card:nth-child(1) {
-      left: 15%; 
-      transform: translateX(-50%) translateY(30px) scale(0.85);
-      opacity: 0.7;
-  }
-  .card:nth-child(4) {
-      left: 70%; 
-      transform: translateX(-50%) translateY(15px) scale(0.95);
-  }
-  .card:nth-child(5) {
-      left: 85%; 
-      transform: translateX(-50%) translateY(30px) scale(0.85);
-      opacity: 0.7;
-  }
-   
-  /* Mobile Hover States */
-  .card:nth-child(3):hover { transform: translateX(-50%) translateY(-20px) scale(1.1); }
-  .card:nth-child(2):hover { transform: translateX(-50%) translateY(-5px) scale(0.95); }
-  .card:nth-child(1):hover { transform: translateX(-50%) translateY(10px) scale(0.85); }
-  .card:nth-child(4):hover { transform: translateX(-50%) translateY(-5px) scale(0.95); }
-  .card:nth-child(5):hover { transform: translateX(-50%) translateY(10px) scale(0.85); }
-
-  .card img {
-    width: 80px;
-    height: 80px;
-  }
-  .card::before {
-    height: 20px;
-    border-radius: 0 0 15px 15px;
-  }
 }
 
 /* Karya (FIXED) */
@@ -1132,99 +1115,396 @@ body{
     z-index: 10;
 }
 
-/* Fasilitas */
-#fasilitas {
-    padding: 80px 20px 40px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+/* Choice Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+    animation: fadeIn 0.3s;
 }
-.facility-card {
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
+.modal-box {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
 }
-.facility-card h2 {
-    font-family:"Bricolage Grotesque";
-    font-size: 32px;
+.modal-box h2 {
+    font-family: "Bricolage Grotesque";
     color: var(--accent);
     margin-bottom: 20px;
 }
-.facility-image-placeholder {
+.modal-btn {
+    display: block;
     width: 100%;
-    height: 300px; 
-    background: linear-gradient(135deg, #1f3fa9, #3973ff); 
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
     border-radius: 10px;
-    margin-bottom: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+.btn-secondary {
+    background: #eee;
+    color: var(--text-dark);
+}
+.modal-btn:hover {
+    transform: scale(1.03);
+}
+
+/* =========================================
+   RETRO METAL SPIN WHEEL UI (OVERHAULED)
+   ========================================= */
+
+.spin-ui {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Dark textured background to make metal pop */
+    background: radial-gradient(circle, #2a2a2a 0%, #000000 100%), url('https://www.transparenttextures.com/patterns/brushed-alum.png');
+    background-blend-mode: multiply;
+    z-index: 1100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.spin-ui h2 {
+    color: white;
+    font-family: 'Playfair Display', serif; /* Classic serif font */
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+/* Main Metal Frame Container */
+.retro-metal-frame {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    /* Complex brushed metal gradient */
+    background: linear-gradient(to bottom, #dcdcdc 0%, #f0f0f0 15%, #a0a0a0 50%, #e0e0e0 85%, #c0c0c0 100%);
+    border-radius: 50px; /* Very rounded corners */
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    position: relative;
+    /* Deep 3D bezel effect */
+    box-shadow: 
+        inset 0 0 10px rgba(255,255,255,0.8),
+        inset 0 0 30px rgba(0,0,0,0.5),
+        0 15px 30px rgba(0,0,0,0.6),
+        0 0 0 5px #555; /* Outer rim rim */
+    border: 2px solid #ddd;
+}
+
+/* Inner Container for Screens */
+.screen-container {
+    flex: 1;
+    background: #111; /* Dark screen background */
+    border-radius: 35px; /* Slightly less rounded than frame */
+    /* Curved glass effect using inset shadows and gradients */
+    box-shadow: 
+        inset 0 10px 20px rgba(255,255,255,0.15), /* Top reflection */
+        inset 0 -10px 20px rgba(0,0,0,0.8),    /* Bottom shadow */
+        inset 10px 0 20px rgba(0,0,0,0.8),     /* Left shadow */
+        inset -10px 0 20px rgba(0,0,0,0.8),    /* Right shadow */
+        0 0 0 3px #444; /* Dark bezel rim */
+    border: 2px solid #222;
+    overflow: hidden;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    border: 3px solid var(--accent);
-    position: relative;
-    overflow: hidden;
-}
-.facility-image-placeholder::after {
-    content: 'Tampilan 360° (Placeholder)';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5px 0;
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 14px;
-}
-.facility-card p {
-    text-align: justify;
-    font-size: 16px;
-    color: var(--text-dark);
-    line-height: 1.6;
-    margin-bottom: 0; 
 }
 
-/* Location Section */
+/* Left Screen Style */
+.screen-left {
+    /* Specific styles for left screen content placement */
+    padding: 20px;
+}
+.screen-left img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid rgba(255,255,255,0.8);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* Right Screen Style */
+.screen-right {
+    /* Specific styles for right screen content placement */
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    color: #eee;
+}
+.screen-right h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+.screen-right h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #ddd;
+    font-weight: 400;
+}
+.screen-right p {
+    font-size: 14px;
+    color: #aaa;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Controls Area (Visual only for now) */
+.small-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #ccc, #999);
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: flex;
+    gap: 15px;
+    box-shadow: inset 0 2px 5px rgba(255,255,255,0.6), inset 0 -2px 5px rgba(0,0,0,0.4), 0 2px 5px rgba(0,0,0,0.5);
+}
+.small-control-btn {
+    width: 15px;
+    height: 15px;
+    background: #666;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.5), 0 1px 1px rgba(255,255,255,0.4);
+}
+.small-control-btn.red { background: #a00; }
+
+/* The Big Metal Spin Button */
+.big-metal-button {
+    position: absolute;
+    bottom: -20px; /* Position overlapping bottom edge */
+    right: 50px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    /* Complex radial gradient for turned metal knob look */
+    background: radial-gradient(circle at center, #f0f0f0 0%, #d0d0d0 30%, #a0a0a0 60%, #707070 100%);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Deep 3D effect */
+    box-shadow: 
+        inset 0 0 10px rgba(255,255,255,0.8),
+        inset 0 0 20px rgba(0,0,0,0.5),
+        0 10px 20px rgba(0,0,0,0.6),
+        0 0 0 5px #e0e0e0, /* Outer ring light */
+        0 0 0 6px #888;    /* Outer ring dark */
+    transition: transform 0.1s;
+    z-index: 10;
+}
+/* Icon inside the button */
+.big-metal-button i {
+    font-size: 36px;
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+/* Active press state */
+.big-metal-button:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 
+        inset 0 0 15px rgba(0,0,0,0.6),
+        0 5px 10px rgba(0,0,0,0.5),
+        0 0 0 5px #ccc,
+        0 0 0 6px #666;
+}
+.big-metal-button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Close Button Styles */
+.close-spin {
+    position: absolute;
+    top: 30px; right: 30px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1200;
+    background: rgba(255,255,255,0.1);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+}
+.close-spin:hover { background: rgba(255,255,255,0.3); }
+
+/* --- LOCATION SECTION FIX --- */
 #location-section {
   padding: 80px 20px;
-  background: var(--bg-2); /* Slight contrast to About's blue */
-  text-align: center;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  margin-bottom: 40px; 
 }
+
 #location-section h2 {
   font-family: "Bricolage Grotesque";
   font-size: 40px;
   color: var(--text-dark);
   margin-bottom: 10px;
 }
+
 #location-section p {
   color: var(--muted);
   margin-bottom: 30px;
+  font-size: 16px;
+  max-width: 600px;
 }
+
 .map-wrapper {
   width: 100%;
-  max-width: 1000px;
-  height: 450px;
+  max-width: 1000px; /* Agar lebar peta sama dengan lebar konten lain */
+  height: 450px;     /* Memberikan tinggi tetap agar peta terlihat */
+  background: white;
+  padding: 10px;     /* Memberi efek bingkai foto */
   border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Shadow halus */
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  border: 5px solid white;
 }
+
 .map-wrapper iframe {
   width: 100%;
   height: 100%;
-  border: 0;
+  border: none;
+  border-radius: 15px; /* Radius sedikit lebih kecil dari wrapper */
 }
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+    #about {
+    min-height: 500px;
+  }
+  .slider-3d {
+    bottom: -30px;
+    height: 350px;
+    padding-bottom: 30px;
+  }
+  .card {
+    width: 150px;
+    height: 250px;
+    border-radius: 15px;
+  }
+  .card:nth-child(3) {
+      transform: translateX(-50%) translateY(0) scale(1.1);
+  }
+  .card:nth-child(2) {
+      left: 30%; 
+      transform: translateX(-50%) translateY(15px) scale(0.95);
+  }
+  .card:nth-child(1) {
+      left: 15%; 
+      transform: translateX(-50%) translateY(30px) scale(0.85);
+      opacity: 0.7;
+  }
+  .card:nth-child(4) {
+      left: 70%; 
+      transform: translateX(-50%) translateY(15px) scale(0.95);
+  }
+  .card:nth-child(5) {
+      left: 85%; 
+      transform: translateX(-50%) translateY(30px) scale(0.85);
+      opacity: 0.7;
+  }
+    
+  .card-front img {
+    width: 80px;
+    height: 80px;
+  }
+  .card-front::before {
+    height: 20px;
+    border-radius: 0 0 15px 15px;
+  }
+    .retro-metal-frame {
+        flex-direction: column;
+        height: auto;
+        border-radius: 30px;
+    }
+    .screen-container {
+        height: 200px; /* Fixed height for stacked screens */
+    }
+    .big-metal-button {
+        bottom: -10px;
+        right: 20px;
+        width: 70px;
+        height: 70px;
+    }
+    .big-metal-button i { font-size: 28px; }
+}
+
 </style>
 </head>
 <body>
+
+<div id="musicChoiceModal" class="modal-overlay">
+    <div class="modal-box">
+        <h2>Galeri Musik</h2>
+        <p>Bagaimana kamu ingin menjelajahi karya musik?</p>
+        <button class="modal-btn btn-primary" onclick="startSpinUI()">Mau Spin! 🎲</button>
+        <button class="modal-btn btn-secondary" onclick="showManualMusic()">Lihat Sendiri 👀</button>
+    </div>
+</div>
+
+<div id="spinWheelOverlay" class="spin-ui">
+    <div class="close-spin" onclick="closeSpinUI()"><i class="fas fa-times"></i></div>
+    
+    <h2>Spin The Music!</h2>
+    
+    <div class="retro-metal-frame">
+        
+        <div class="screen-container screen-left" id="spinScreenLeft">
+            <img src="https://via.placeholder.com/180/333/fff?text=MUSIC" alt="Placeholder">
+        </div>
+
+        <div class="screen-container screen-right" id="spinScreenRight">
+             <h2>Ready?</h2>
+             <h3>Tekan Tombol Play</h3>
+             <p>---</p>
+        </div>
+
+        <div class="small-controls">
+            <div class="small-control-btn"></div>
+            <div class="small-control-btn"></div>
+            <div class="small-control-btn red"></div>
+            <div class="small-control-btn"></div>
+        </div>
+
+        <button id="btnSpinTrigger" class="big-metal-button" onclick="spinTheWheel()">
+            <i class="fas fa-play"></i>
+        </button>
+
+    </div>
+</div>
 
 <div class="nav" onclick="returnToRoadmap()">
   <div class="logo-mark">PZ</div>
@@ -1232,7 +1512,7 @@ body{
 </div>
 
 <div id="home" class="page active">
-   
+    
   <div class="landing-section">
       <div class="landing-content">
           <div class="logo-mark" style="width: 60px; height: 60px; margin: 0 auto 20px; font-size: 24px;">PZ</div>
@@ -1256,7 +1536,7 @@ body{
                        S 450 250, 500 150 
                        C 550 50, 650 50, 700 150
                        S 850 250, 900 150" />
-               
+                
               <path class="roadmap-dashed-outline" 
                     d="M 100 150 
                        C 150 50, 250 50, 300 150 
@@ -1266,7 +1546,7 @@ body{
 
               <polygon class="arrowhead" points="900,150 915,140 915,160" />
           </svg>
-           
+            
           <div class="road-step-wrapper">
             <div class="road-icon" data-page="promed-nav"><i class="fas fa-info"></i></div>
             <div class="step active" data-page="promed-nav">Tentang Promed & Peminatan</div>
@@ -1310,11 +1590,70 @@ body{
     <h2>About Us</h2>
     <p>Tim di balik PromedZone terdiri dari individu kreatif yang berfokus pada pengembangan media dan teknologi digital.</p>
     <div class="slider-3d" id="aboutCards">
-      <div class="card"><img src="https://via.placeholder.com/180"><h3>Sovia</h3><p>Developer</p></div>
-      <div class="card"><img src="https://via.placeholder.com/180"><h3>Nabila</h3><p>Developer</p></div>
-      <div class="card"><img src="https://via.placeholder.com/180"><h3>Janyce</h3><p>Project Manager</p></div>
-      <div class="card"><img src="https://via.placeholder.com/180"><h3>Kirana</h3><p>Developer</p></div>
-      <div class="card"><img src="https://via.placeholder.com/180"><h3>Mayske</h3><p>Developer</p></div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://via.placeholder.com/180">
+                    <h3>Sovia</h3>
+                    <p>Developer</p>
+                </div>
+                <div class="card-back">
+                    <p>"Full Stack Developer yang antusias dengan teknologi web modern dan keamanan siber."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://via.placeholder.com/180">
+                    <h3>Nabila</h3>
+                    <p>Developer</p>
+                </div>
+                <div class="card-back">
+                    <p>"Creative Developer yang fokus pada interaksi pengguna yang intuitif dan desain responsif."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://via.placeholder.com/180">
+                    <h3>Janyce</h3>
+                    <p>Project Manager</p>
+                </div>
+                <div class="card-back">
+                    <p>"Project Manager yang memastikan setiap milestone tercapai tepat waktu dan kolaborasi tim berjalan lancar."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://via.placeholder.com/180">
+                    <h3>Kirana</h3>
+                    <p>Developer</p>
+                </div>
+                <div class="card-back">
+                    <p>"Backend Specialist yang menjaga keamanan database dan efisiensi performa server."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://via.placeholder.com/180">
+                    <h3>Mayske</h3>
+                    <p>Developer</p>
+                </div>
+                <div class="card-back">
+                    <p>"UI Engineer yang gemar mengeksplorasi desain visual yang estetik dan pengalaman pengguna yang mulus."</p>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 
@@ -1323,8 +1662,9 @@ body{
       <p>Kunjungi kami di Program Pendidikan Vokasi Universitas Indonesia.</p>
       <div class="map-wrapper">
         <iframe 
-            src="https://maps.google.com/maps?q=Program+Pendidikan+Vokasi+Universitas+Indonesia&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-            allowfullscreen>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.263764638683!2d106.829461314769!3d-6.359907995398048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ec189231230b%3A0x53096b65112c3e11!2sProgram%20Pendidikan%20Vokasi%20Universitas%20Indonesia!5e0!3m2!1sen!2sid!4v1636344567890!5m2!1sen!2sid" 
+            allowfullscreen="" 
+            loading="lazy">
         </iframe>
       </div>
   </div>
@@ -1390,11 +1730,11 @@ body{
 <div id="fasilitas" class="page">
     <div class="facility-card">
         <h2>Fasilitas Produksi Media</h2>
-         
+          
         <div class="facility-image-placeholder">
             [Area untuk Foto 360°]
         </div>
-         
+          
         <p>
             **POLAR LAB** (Laboratorium Produksi Media dan Teaching Factory) adalah laboratorium milik Program Studi Produksi Media yang berfungsi sebagai pusat penelitian dan produksi media, sekaligus sebagai *teaching factory* untuk mendukung pengembangan bakat, minat, dan pembelajaran mahasiswa di berbagai bidang, seperti *game development*, animasi, jurnalisme digital, dan produksi media lainnya.
         </p>
@@ -1412,7 +1752,7 @@ body{
             <div class="calendar-title" id="monthYearTitle"></div>
             <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
         </div>
-         
+          
         <div class="calendar-grid">
             <div class="calendar-day-name">Sen</div>
             <div class="calendar-day-name">Sel</div>
@@ -1422,7 +1762,7 @@ body{
             <div class="calendar-day-name">Sab</div>
             <div class="calendar-day-name">Min</div>
         </div>
-         
+          
         <div class="calendar-grid" id="calendarDates">
             </div>
 
@@ -1440,13 +1780,13 @@ body{
     <button class="step" data-page="calendar" style="margin-top: 0; align-self: flex-start;">Kembali ke Kalender</button>
     <div class="detail-card">
         <h2 id="detailTitle">Judul Acara</h2>
-         
+          
         <div class="detail-info">
             <p><strong>Tanggal</strong>: <span id="detailDate"></span></p>
             <p><strong>Tempat</strong>: <span id="detailPlace"></span></p>
             <p><strong>Penyelenggara</strong>: <span id="detailOrganizer"></span></p>
         </div>
-         
+          
         <div class="detail-description">
             <p id="detailDescription"></p>
             <p>Info lebih lanjut: <a href="#" id="detailIgLink" target="_blank"><i class="fab fa-instagram"></i> <span id="detailIgName"></span></a></p>
@@ -1457,7 +1797,7 @@ body{
 <div id="karya" class="page">
     <h2>Galeri Karya</h2>
     <p>Film pendek, animasi, dan game edukatif karya mahasiswa.</p>
-     
+      
     <div class="work-filter-tabs">
         <div class="tab-button active" data-filter="all" id="allTab"><i class="fas fa-layer-group"></i> Semua</div>
         <div class="tab-button" data-filter="game" id="gameTab"><i class="fas fa-gamepad"></i> Game</div>
@@ -1472,22 +1812,22 @@ body{
 
         <button class="nav-arrow right" id="scrollRight"><i class="fas fa-chevron-right"></i></button>
     </div>
-     
+      
     <button class="step" data-page="home">Kembali ke Home</button>
 </div>
 
 <div id="work-detail" class="page">
     <div class="detail-card">
         <h2 id="workDetailTitle">Judul Karya</h2>
-         
+          
         <div id="workMediaContainer" class="media-container">
             </div>
-         
+          
         <div class="detail-info">
             <p><strong>Kategori</strong>: <span id="workDetailCategory"></span></p>
             <p><strong>Status</strong>: <span id="workDetailStatus"></span></p>
         </div>
-         
+          
         <div class="detail-description">
             <p id="workDetailDescription"></p>
         </div>
@@ -1519,7 +1859,7 @@ function returnToRoadmap() {
 
 function navigateToPage(targetPage, itemId = null) {
     pages.forEach(p => p.classList.remove("active"));
-     
+      
     // Stop media playback saat pindah halaman
     stopMediaPlayback();
 
@@ -1534,7 +1874,7 @@ function navigateToPage(targetPage, itemId = null) {
     } else if (targetPage === 'work-detail' && itemId) {
         showWorkDetail(itemId);
     }
-     
+      
     if (targetPage === 'promed-peminatan-detail') {
         renderPeminatanListDetail();
     }
@@ -1546,7 +1886,7 @@ function navigateToPage(targetPage, itemId = null) {
     const roadmapContainer = document.getElementById('heroRoadmap');
     if (roadmapContainer) {
         document.querySelectorAll('#heroRoadmap .step').forEach(b => b.classList.remove("active"));
-         
+          
         const promedNavPages = ['promed-nav', 'promed-about-detail', 'promed-peminatan-detail', 'peminatan-single-detail-temp'];
         const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
 
@@ -1583,7 +1923,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigateToPage(this.dataset.page);
         });
     });
-     
+      
     // INITIALIZE HOME ACTIVE STATE
     const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
     if (promedNavButton) {
@@ -1630,7 +1970,7 @@ function renderPeminatanListDetail() {
     const container = document.getElementById('peminatanList');
     if (!container) return;
     container.innerHTML = '';
-     
+      
     peminatanData.forEach((peminatan) => {
         const itemBox = document.createElement('div');
         itemBox.classList.add('peminatan-item-box');
@@ -1698,24 +2038,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // DATA DOSEN
-// --- PERUBAHAN DI SINI: MENAMBAHKAN PROPERTI 'image' ---
 const dosenData = [
     { name: "Ngurah Rangga Wisesa, .", image:"", position: "Kepala Program Studi Produksi Media", ig: "ranggawisesa", igLink: "https://www.instagram.com/ranggawisesa", linkedin: "dr-rangga-w-2906189b", linkedinLink: "https://www.linkedin.com/in/dr-rangga-w-2906189b" },
     { name: "Dr. Achmad Istamar", image:"fotodosen.jpg/4b473379-e188-43b6-ac31-512d713e2bf5.JPG", position: "Country Head-Indonesia at Google Customer Solutions", ig: "achmadistamar", igLink: "https://www.instagram.com/achmadistamar", linkedin: "istamar", linkedinLink: "https://www.linkedin.com/in/istamar" },
     { name: "Sheila Timothy", image:"fotodosen.jpg/296a6b3f-c656-4e7c-9d52-37f5e3bfc30e.JPG", position: "Produser Film", ig: "lalatimothy", igLink: "https://www.instagram.com/lalatimothy", linkedin: "sheila-timothy", linkedinLink: "https://www.linkedin.com/in/sheila-timothy" },
-    
-    // --- FOTO DIAN SASTRO DIMASUKKAN DI SINI ---
-    { 
-        name: "Dian Paramita Sastrowardoyo, M.M.", 
-        position: "Aktris, Produser, Sutradara Film", 
-        ig: "therealdisastr", 
-        igLink: "https://www.instagram.com/therealdisastr", 
-        linkedin: null, 
-        linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo",
-        image: "fotodosen.jpg/24451816-7f74-4c26-a57a-af6d73d787ee.JPG" 
-    }, 
-    // -------------------------------------------
-
+    { name: "Dian Paramita Sastrowardoyo, M.M.", position: "Aktris, Produser, Sutradara Film", ig: "therealdisastr", igLink: "https://www.instagram.com/therealdisastr", linkedin: null, linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo", image: "fotodosen.jpg/24451816-7f74-4c26-a57a-af6d73d787ee.JPG" }, 
     { name: "Alif Keenan Ibrahim, M.A.", image:"fotodosen.jpg/73e3bdbf-caf5-4838-9198-a578a911a16b.JPG", position: "Content Strategy & Analytics at Vidio", ig: "alif.keenan", igLink: "https://www.instagram.com/alif.keenan", linkedin: "alif-ibrahim", linkedinLink: "https://www.linkedin.com/in/alif-ibrahim" },
     { name: "Hendrika Gaudens Refwalu, M.M.", image:"fotodosen.jpg/f02d39b6-9e99-4b61-bc30-605e747cc344.JPG", position: "Marketing Lead Microsoft Indonesia", ig: "densi_refwalu", igLink: "https://www.instagram.com/densi_refwalu", linkedin: "densirefwalu", linkedinLink: "https://www.linkedin.com/in/densirefwalu" },
     { name: "Wafa Taftazani, MBA", image:"fotodosen.jpg/d56f3a6b-cd86-4ca7-b931-00ab80537c88.JPG", position: "UpBanx, VCGamers, RANSVERSE", ig: "wafataftazani", igLink: "https://www.instagram.com/wafataftazani", linkedin: "wafataftazani", linkedinLink: "https://www.linkedin.com/in/wafataftazani" },
@@ -1749,13 +2076,10 @@ function renderDosenGrid() {
             socialLinks += `<a href="${dosen.linkedinLink}" target="_blank"><i class="fab fa-linkedin"></i></a>`;
         }
 
-        // --- PERUBAHAN DI SINI: MENGECEK APAKAH ADA GAMBAR ---
         let imageHTML = '';
         if (dosen.image) {
-            // Jika ada foto, tampilkan img tag
             imageHTML = `<img src="${dosen.image}" alt="${dosen.name}" class="dosen-image-real">`;
         } else {
-            // Jika tidak ada, tampilkan placeholder
             imageHTML = `<div class="dosen-image-placeholder">[Foto Dosen ${index + 1}]</div>`;
         }
 
@@ -1768,34 +2092,30 @@ function renderDosenGrid() {
         dosenGridContainer.appendChild(card);
     });
     
-    // Render the Animated Arch
     renderDosenArch();
 }
 
-// --- NEW ANIMATED ARCH LOGIC ---
+// --- ANIMATED ARCH LOGIC ---
 let archAnimationId;
 let archIsPaused = false;
-let currentArchOffset = 0; // Angle offset for animation
+let currentArchOffset = 0; 
 
 function renderDosenArch() {
     if (!dosenArchContainer) return;
     dosenArchContainer.innerHTML = '';
     
-    // Stop any previous animation loop to avoid duplicates
     if(archAnimationId) cancelAnimationFrame(archAnimationId);
     
     const total = dosenData.length;
-    const radius = 600; // Large radius for flatter arch
+    const radius = 600; 
     const centerX = dosenArchContainer.clientWidth / 2;
-    const centerY = 600; // Push center down to form arch at top
+    const centerY = 600; 
     
-    // Create elements
     dosenData.forEach((dosen, index) => {
         const item = document.createElement('div');
         item.classList.add('arch-item');
         
-        // --- PERUBAHAN DI SINI: MENGGUNAKAN GAMBAR JIKA ADA ---
-        let imgSrc = "https://via.placeholder.com/120x160"; // Default placeholder
+        let imgSrc = "https://via.placeholder.com/120x160"; 
         if (dosen.image) {
             imgSrc = dosen.image;
         }
@@ -1803,12 +2123,10 @@ function renderDosenArch() {
         item.innerHTML = `<img src="${imgSrc}" alt="${dosen.name}" draggable="false">`; 
         item.title = dosen.name;
         
-        // Add click to scroll
         item.onclick = () => {
             const target = document.getElementById('dosen-card-' + index);
             if(target) {
                 target.scrollIntoView({behavior: 'smooth', block: 'center'});
-                // Highlight effect
                 target.style.transition = "transform 0.3s, box-shadow 0.3s";
                 target.style.transform = "scale(1.05)";
                 target.style.boxShadow = "0 0 20px var(--accent)";
@@ -1819,78 +2137,43 @@ function renderDosenArch() {
             }
         };
         
-        // Mouse events to pause/play
         item.addEventListener('mouseenter', () => { archIsPaused = true; });
         item.addEventListener('mouseleave', () => { archIsPaused = false; });
         
         dosenArchContainer.appendChild(item);
     });
     
-    // Start Animation Loop
     animateArch();
 }
 
 function animateArch() {
     const items = document.querySelectorAll('.arch-item');
     const total = items.length;
-    const radius = 450; // Adjust radius for visual
-    const spread = 20; // Degrees between items
+    const radius = 450; 
+    const spread = 20; 
     
     if (!archIsPaused) {
-        // Move "Clockwise": Decrease angle
         currentArchOffset -= 0.05; 
     }
     
     items.forEach((item, index) => {
-        // Calculate base angle for this item
-        // Distribute them. 
-        // We want a continuous loop feel, but hard with limited items without cloning.
-        // Simple carousel logic:
-        
         let angleDeg = (index * spread) + currentArchOffset;
-        
-        // Keep angle within reasonable bounds or wrap effect (advanced), 
-        // simpler: let them rotate in a large circle, hide bottom.
-        // But for a "Meet Team" arch typically items oscillate or it's a finite list.
-        // Let's make them rotate in a full circle but only show top.
-        
-        // Adjust angle so 0 is top (270deg standard math, but here let's use sin/cos directly)
-        // Let 270 deg be top.
-        
-        let theta = (angleDeg - 90) * (Math.PI / 180); // Convert to radians
+        let theta = (angleDeg - 90) * (Math.PI / 180); 
         
         let x = Math.cos(theta) * radius;
         let y = Math.sin(theta) * radius;
         
-        // Rotation of the card itself to point to center? 
-        // Reference image has cards upright or slightly tilted.
-        // Let's tilt them slightly based on x position.
-        let rotateCard = x * 0.05; // Slight tilt
+        let rotateCard = x * 0.05; 
         
-        // Centering logic (container center + x)
-        // Container height is 500. Center is roughly middle bottom?
-        // Let's fix center at bottom: 50% left, 100% top
-        
-        // Position relative to container center
-        // Container is flex, but items are absolute.
-        // Let center be:
         const cX = dosenArchContainer.clientWidth / 2;
-        const cY = 500; // Push down
+        const cY = 500; 
         
-        // Apply positions
-        item.style.left = (cX + x - 60) + 'px'; // -60 is half width
-        item.style.top = (cY + y - 80) + 'px';  // -80 is half height
+        item.style.left = (cX + x - 60) + 'px'; 
+        item.style.top = (cY + y - 80) + 'px';  
         
-        // Z-index based on Y (lower Y = further back/top?) 
-        // Actually in arch, top items are usually front.
-        // Let's calculate opacity/scale based on Angle (near top = 270deg)
-        
-        // Normalized angle 0-360
         let normAngle = (angleDeg % 360);
         if (normAngle < 0) normAngle += 360;
         
-        // Visibility check (only show top arc roughly 200 to 340)
-        // Let's hide items below "horizon"
         if (y > 0) {
              item.style.opacity = 0;
              item.style.pointerEvents = 'none';
@@ -1907,13 +2190,27 @@ function animateArch() {
 
 
 // DATA KARYA
+// Updated with specific music data from user
 const worksData = [
-    { id: 'arteeich', title: 'Arteeich', category: 'Band/Musik - Bedroom Pop', type: 'music', status: 'Aktif', description: 'Band bedroom pop buatan mahasiswa Produksi Media UI.', mediaType: 'music', youtubeId: 'dQw4w9WgXcQ', youtubeLink: 'https://www.youtube.com/@arteeich', igLink: 'https://www.instagram.com/arteeich?igsh=NGx5cWZiMTQ5NDVn' },
-    { id: 'juzzer', title: 'Juzzer', category: 'Band/Musik - Heavy Pop', type: 'music', status: 'Aktif', description: 'Band heavy pop buatan mahasiswa Produksi Media UI.', mediaType: 'music', youtubeId: '9bZkp7q19f0', youtubeLink: 'https://youtube.com/channel/UC7uyhwYckqlfW3DJz3cLOBw?si=ubkLYmSx33Ys_6e2', igLink: 'https://www.instagram.com/juzzer___?igsh=dTZ3ZG51dDMydGQx' },
-    { id: 'secrethideaway', title: 'Secret Hideaway', category: 'Band/Musik - Melancholic Rock', type: 'music', status: 'Aktif', description: 'Band melancholic rock buatan mahasiwa Produksi Media UI.', mediaType: 'music', youtubeId: 'uJj2_4F_0Ew', youtubeLink: 'https://youtube.com/channel/UCfLCHv26iyAQme7ArdhISjw?si=N4c-LP6FnSwyeDwh', igLink: 'https://www.instagram.com/secrethideawayyyy?igsh=MTZjbXJkb3V3bGpjbw==' },
-    { id: 'sarjana disko', title: 'sarjana disko', category: 'Band/Musik', type: 'music', status: 'Aktif', description: 'Band buatan mahasiswa Produksi Media UI.', mediaType: 'music', youtubeId: 'UC5WZdhyRY1fV2KBOIQd7dHA', youtubeLink: 'https://youtube.com/@sarjana.diskoo?si=pEZuXif9s8T1olgT', igLink: 'https://www.instagram.com/sarjana.disko?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
-    { id: 'The Jorts', title: 'The Jorts', category: 'Band/Musik', type: 'music', status: 'Aktif', description: 'Band buatan mahasiswa baru Produksi Media UI.', mediaType: 'music', igLink: 'https://www.instagram.com/curiousjorts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
-    { id: 'Charmless Pals', title: 'Charmless Pals', category: 'Band/Musik', type: 'music', status: 'Aktif', description: 'Band buatan mahasiswa baru Produksi Media UI.', mediaType: 'music', igLink: 'https://www.instagram.com/charmlesspals?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
+    // -- 12 LAGU BARU --
+    { id: 'arteeich_ever', title: 'Ever', category: 'Arteeich - Musik', type: 'music', status: 'Aktif', description: 'Lagu Ever oleh Arteeich.', mediaType: 'music', youtubeId: '4Q9zHVsCQ-8', youtubeLink: 'https://youtu.be/4Q9zHVsCQ-8' },
+    
+    { id: 'juzzer_buku', title: 'Buku Pesta Cinta', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Buku Pesta Cinta oleh Juzzer.', mediaType: 'music', youtubeId: '9HhlxZ9X3hE', youtubeLink: 'https://youtu.be/9HhlxZ9X3hE' },
+    { id: 'juzzer_perempuan', title: 'Apakah Aku Harus Berubah Menjadi Perempuan', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Apakah Aku Harus Berubah Menjadi Perempuan oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw' },
+    { id: 'juzzer_asam', title: 'Asam Manis', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Asam Manis oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw' },
+    { id: 'juzzer_akukau', title: 'Aku Kau dan Musik', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Aku Kau dan Musik oleh Juzzer.', mediaType: 'music', youtubeId: 'poZUlQ7I7h4', youtubeLink: 'https://youtu.be/poZUlQ7I7h4' },
+    { id: 'juzzer_heykau', title: 'Hey Kau Gadis Nan Jauh Disana', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hey Kau Gadis Nan Jauh Disana oleh Juzzer.', mediaType: 'music', youtubeId: 'zWXvpkdwedY', youtubeLink: 'https://youtu.be/zWXvpkdwedY' },
+    
+    { id: 'sh_alleen', title: 'Alleen', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Alleen oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'mMdXWIQ4ppU', youtubeLink: 'https://youtu.be/mMdXWIQ4ppU' },
+    { id: 'sh_firstlook', title: 'First Look', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu First Look oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8MFqPf4c9jg', youtubeLink: 'https://youtu.be/8MFqPf4c9jg' },
+    { id: 'sh_tryagain', title: 'Try Again', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Try Again oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'aeI7lVT-mMA', youtubeLink: 'https://youtu.be/aeI7lVT-mMA' },
+    { id: 'sh_hideaway', title: 'Hideaway', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hideaway oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8GbPy8YtRiE', youtubeLink: 'https://youtu.be/8GbPy8YtRiE' },
+    
+    { id: 'sd_givein', title: 'Give In To The Groove', category: 'Sarjana Disko - Musik', type: 'music', status: 'Aktif', description: 'Lagu Give In To The Groove oleh Sarjana Disko.', mediaType: 'music', youtubeId: '7rkB7-zWjxA', youtubeLink: 'https://youtu.be/7rkB7-zWjxA' },
+    
+    { id: 'cp_wherever', title: 'Wherever The Wind Take Us', category: 'Charmless Pals - Musik', type: 'music', status: 'Aktif', description: 'Lagu Wherever The Wind Take Us oleh Charmless Pals.', mediaType: 'music', youtubeId: 'PbQ9KoLncWc', youtubeLink: 'https://youtu.be/PbQ9KoLncWc' },
+
+    // -- KARYA LAINNYA (GAME/FILM) TETAP ADA --
     { id: 'fate', title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film' },
     { id: 'baduy', title: 'Baduy', category: 'Film Dokumenter', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film dokumenter karya mahasiswa Produksi Media UI.', mediaType: 'film' },
     { id: 'Drawn To You', title: 'Drawn To You', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', igLink: null },
@@ -1932,16 +2229,25 @@ const scrollAmount = 240;
 let currentFilter = 'all';
 
 function renderWorksList(filter = 'all') {
+    // MODIFIED: Intercept 'music' filter to show modal instead
+    if (filter === 'music') {
+        showMusicChoiceModal();
+        // Highlight the button manually since we're not running the standard render
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('musicTab').classList.add('active');
+        return; 
+    }
+
     worksList.innerHTML = '';
     const filteredData = worksData.filter(work => filter === 'all' || work.type === filter);
-     
+      
     if (filteredData.length === 0) {
         worksList.innerHTML = '<p style="color:var(--muted); text-align:center; width:100%;">Tidak ada karya dalam kategori ini.</p>';
         scrollLeftBtn.style.display = 'none';
         scrollRightBtn.style.display = 'none';
         return;
     }
-     
+      
     scrollLeftBtn.style.display = 'block';
     scrollRightBtn.style.display = 'block';
 
@@ -1954,6 +2260,13 @@ function renderWorksList(filter = 'all') {
         const shortDesc = work.description.substring(0, 70) + (work.description.length > 70 ? '...' : '');
         const categoryDisplay = work.category.split(' - ')[0];
 
+        // Generate thumbnail URL
+        let thumbUrl = '';
+        if(work.youtubeId) thumbUrl = `https://img.youtube.com/vi/${work.youtubeId}/mqdefault.jpg`;
+
+        // Use thumbnail if available for cover
+        const coverContent = thumbUrl ? `<img src="${thumbUrl}" style="width:100%; height:100%; object-fit:cover;">` : `Cover ${work.title}`;
+
         wrapper.innerHTML = `
             <div class="work-card">
                 <div class="work-card-info">
@@ -1961,7 +2274,7 @@ function renderWorksList(filter = 'all') {
                     <p>${categoryDisplay}</p>
                     <p>${shortDesc}</p>
                 </div>
-                <div class="work-card-image">Cover ${work.title}</div>
+                <div class="work-card-image">${coverContent}</div>
                 <div class="work-card-caption">${work.title}</div>
             </div>
         `;
@@ -1970,6 +2283,149 @@ function renderWorksList(filter = 'all') {
     worksList.scrollLeft = 0;
     checkScrollPosition();
 }
+
+// --- NEW FUNCTIONS FOR SPIN WHEEL (SINGLE FRAME STYLE) ---
+
+function showMusicChoiceModal() {
+    document.getElementById('musicChoiceModal').style.display = 'flex';
+}
+
+function showManualMusic() {
+    document.getElementById('musicChoiceModal').style.display = 'none';
+    // Manually render music list bypassing the interceptor
+    worksList.innerHTML = '';
+    const filteredData = worksData.filter(work => work.type === 'music');
+    
+    scrollLeftBtn.style.display = 'block';
+    scrollRightBtn.style.display = 'block';
+
+    filteredData.forEach(work => {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('work-card-wrapper');
+        wrapper.dataset.id = work.id;
+        wrapper.onclick = () => navigateToPage('work-detail', work.id);
+        
+        const shortDesc = work.description.substring(0, 70) + (work.description.length > 70 ? '...' : '');
+        const categoryDisplay = work.category.split(' - ')[0];
+        
+        let thumbUrl = '';
+        if(work.youtubeId) thumbUrl = `https://img.youtube.com/vi/${work.youtubeId}/mqdefault.jpg`;
+        const coverContent = thumbUrl ? `<img src="${thumbUrl}" style="width:100%; height:100%; object-fit:cover;">` : `Cover ${work.title}`;
+
+        wrapper.innerHTML = `
+            <div class="work-card">
+                <div class="work-card-info">
+                    <h4>${work.title}</h4>
+                    <p>${categoryDisplay}</p>
+                    <p>${shortDesc}</p>
+                </div>
+                <div class="work-card-image">${coverContent}</div>
+                <div class="work-card-caption">${work.title}</div>
+            </div>
+        `;
+        worksList.appendChild(wrapper);
+    });
+    worksList.scrollLeft = 0;
+    checkScrollPosition();
+}
+
+function startSpinUI() {
+    document.getElementById('musicChoiceModal').style.display = 'none';
+    document.getElementById('spinWheelOverlay').style.display = 'flex';
+    
+    // Initialize display with a placeholder using the new layout
+    const leftScreen = document.getElementById('spinScreenLeft');
+    const rightScreen = document.getElementById('spinScreenRight');
+    
+    leftScreen.innerHTML = `
+        <div style="width:180px; height:180px; background:#222; display:flex; align-items:center; justify-content:center; border-radius:12px; border:2px solid #444; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <i class="fas fa-music" style="font-size:60px; color:#555;"></i>
+        </div>
+    `;
+
+    rightScreen.innerHTML = `
+        <h2>Ready?</h2>
+        <h3>Tekan Tombol Play di Kanan Bawah</h3>
+        <p>---</p>
+    `;
+    
+    // Reset button state
+    const btn = document.getElementById('btnSpinTrigger');
+    btn.disabled = false;
+}
+
+function closeSpinUI() {
+    document.getElementById('spinWheelOverlay').style.display = 'none';
+}
+
+function spinTheWheel() {
+    const btn = document.getElementById('btnSpinTrigger');
+    const musicItems = worksData.filter(w => w.type === 'music');
+    
+    if (musicItems.length === 0) return;
+
+    btn.disabled = true;
+    // Optional: Add spinning icon to the big button, but keeping it simple for the metal look
+    // btn.innerHTML = '<i class="fas fa-sync fa-spin"></i>'; 
+    
+    // Animation variables
+    let duration = 3000; // 3 seconds spin
+    let intervalTime = 100; // Change every 100ms
+    let elapsedTime = 0;
+    let finalItem = null;
+
+    const shuffleInterval = setInterval(() => {
+        // Pick random item for visual shuffle
+        const randomIndex = Math.floor(Math.random() * musicItems.length);
+        const item = musicItems[randomIndex];
+        
+        updateSpinDisplay(item, false); // false = temporary state
+        
+        elapsedTime += intervalTime;
+        
+        // Slow down near end
+        if (elapsedTime > duration - 1000) {
+            // intervalTime += 50; // Logic to slow down interval is complex here without recursive timeout, simplified to constant speed then stop
+        }
+        
+        if (elapsedTime >= duration) {
+            clearInterval(shuffleInterval);
+            // Final Selection
+            const finalIndex = Math.floor(Math.random() * musicItems.length);
+            finalItem = musicItems[finalIndex];
+            updateSpinDisplay(finalItem, true);
+            
+            // Auto open detail after a moment
+            setTimeout(() => {
+                closeSpinUI();
+                showWorkDetail(finalItem.id);
+            }, 1500);
+        }
+    }, intervalTime);
+}
+
+function updateSpinDisplay(item, isFinal) {
+    const leftScreen = document.getElementById('spinScreenLeft');
+    const rightScreen = document.getElementById('spinScreenRight');
+    
+    let thumbUrl = '';
+    if(item.youtubeId) thumbUrl = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+    
+    // Update Left Screen (Image)
+    leftScreen.innerHTML = `<img src="${thumbUrl}" alt="${item.title}" style="animation: fadeIn 0.1s;">`;
+
+    // Update Right Screen (Text)
+    const artistName = item.category.split(' - ')[0];
+    // Highlight color for final result
+    const titleColor = isFinal ? '#ffd24d' : 'white';
+
+    rightScreen.innerHTML = `
+        <h2 style="color:${titleColor}; animation: fadeIn 0.1s;">${artistName}</h2>
+        <h3 style="animation: fadeIn 0.1s;">${item.title}</h3>
+        <p style="animation: fadeIn 0.1s;">Track Recording - ${isFinal ? 'Selected' : 'Scanning...'}</p>
+    `;
+}
+
 
 function showWorkDetail(workId) {
     const work = worksData.find(w => w.id === workId);
@@ -2006,8 +2462,11 @@ function showWorkDetail(workId) {
 
 document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', function() {
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
+        if (this.dataset.filter !== 'music') { 
+             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+             this.classList.add('active');
+        }
+        
         currentFilter = this.dataset.filter;
         renderWorksList(currentFilter);
     });
@@ -2118,7 +2577,7 @@ function renderCalendar(monthOffset) {
             const eventDot = document.createElement('div');
             eventDot.classList.add('event-dot');
             dayCell.appendChild(eventDot);
-            
+             
             dayCell.dataset.date = `${year}-${month}-${day}`;
             dayCell.addEventListener('click', (e) => {
                 const clickedDate = e.target.dataset.date;
