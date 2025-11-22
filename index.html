@@ -17,10 +17,10 @@
   --text-dark:#0b1221;
   --bg-about:#0f1e52; 
   --calendar-blue: #1652ff; 
-  --neon-blue: #00fffb; 
-  /* New variable for metal theme */
-  --metal-dark: #2c2c2c;
-  --metal-light: #e6e6e6;
+  /* Neumorphism Colors */
+  --neu-bg: #e0e5ec;
+  --neu-shadow-light: #ffffff;
+  --neu-shadow-dark: #a3b1c6;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html { scroll-behavior: smooth; }
@@ -197,134 +197,245 @@ body{
 .step.active { background: var(--accent); box-shadow: 0 8px 15px rgba(22,82,255,0.4); transform: scale(1.05); }
 .step:hover:not(.active) { transform: scale(1.03); box-shadow: 0 6px 12px rgba(22,82,255,0.3); }
 
-/* CALENDAR CSS */
+/* --- NEW NEUMORPHIC CALENDAR STYLES --- */
 #calendar {
-  padding: 80px 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: var(--neu-bg); /* Solid bg for neumorphism effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
 }
-#calendar h2 {
-    font-family:"Bricolage Grotesque";
-    font-size: 40px;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+
+.neu-calendar-container {
+    position: relative;
+    width: 95%;
+    max-width: 1200px; /* Besar hampir full width */
+    min-height: 80vh;  /* Tinggi hampir full screen */
+    background: var(--neu-bg);
+    border-radius: 30px;
+    /* Soft Neumorphic Shadow */
+    box-shadow: 20px 20px 60px var(--neu-shadow-dark), 
+               -20px -20px 60px var(--neu-shadow-light);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
-#calendar .calendar-wrapper {
-    max-width: 450px;
-    width: 100%;
-    margin-top: 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 20px;
-}
-.calendar-header {
+
+/* Header Section (Month/Year + Nav) */
+.neu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    color: var(--calendar-blue);
+    margin-bottom: 30px;
+    padding: 0 20px;
 }
-.calendar-header button {
-    background: none;
+
+.neu-title-group h2 {
+    font-family: "Bricolage Grotesque";
+    font-size: 3rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+.neu-title-group p {
+    color: var(--muted);
+    font-size: 1.2rem;
+}
+
+.neu-nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     border: none;
-    font-size: 1.5rem;
-    color: var(--calendar-blue);
+    background: var(--neu-bg);
+    color: var(--text-dark);
+    font-size: 1.2rem;
     cursor: pointer;
-    padding: 5px;
+    margin-left: 15px;
+    box-shadow: 5px 5px 10px var(--neu-shadow-dark), 
+               -5px -5px 10px var(--neu-shadow-light);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
-.calendar-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
+.neu-nav-btn:hover {
+    transform: translateY(-2px);
 }
-.calendar-grid {
+.neu-nav-btn:active {
+    box-shadow: inset 5px 5px 10px var(--neu-shadow-dark), 
+                inset -5px -5px 10px var(--neu-shadow-light);
+    transform: translateY(0);
+}
+
+/* Calendar Grid Big */
+.neu-grid-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
     text-align: center;
-    font-size: 14px;
-}
-.calendar-day-name {
-    font-weight: 600;
+    margin-bottom: 20px;
+    font-weight: 700;
     color: var(--muted);
-    padding: 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-.calendar-date {
+
+.neu-grid-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.neu-date-cell {
+    background: var(--neu-bg);
+    border-radius: 20px;
+    min-height: 100px; /* Kotak besar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 40px;
-    width: 100%;
-    border-radius: 50%;
-    cursor: default;
-    position: relative;
-    transition: background 0.2s;
-}
-.calendar-date.event-date {
-    color: var(--text-dark); 
+    justify-content: flex-start;
+    padding-top: 15px;
+    font-size: 1.2rem;
     font-weight: 600;
-    cursor: pointer;
+    color: var(--text-dark);
+    position: relative;
+    cursor: default;
+    transition: all 0.3s ease;
 }
-.calendar-date.event-date:hover {
-    background: var(--bg-1); 
+
+/* Efek hover pada tanggal */
+.neu-date-cell:not(.inactive):hover {
+    box-shadow: 5px 5px 10px var(--neu-shadow-dark), 
+               -5px -5px 10px var(--neu-shadow-light);
+    transform: scale(1.02);
+    z-index: 5;
 }
-.calendar-date.inactive {
-    color: #ccc;
+
+.neu-date-cell.inactive {
+    opacity: 0.3;
 }
-.event-dot {
-    position: absolute;
-    bottom: 5px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--accent); 
+
+/* Dot Biru untuk Event */
+.neu-event-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent);
     border-radius: 50%;
-    opacity: 1; 
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(22, 82, 255, 0.5);
+    display: none; /* Hidden by default */
 }
-.event-date .event-dot {
-    display: block; 
-}
-.event-list-container {
-    max-width: 450px;
-    width: 100%;
-    margin-top: 30px;
-}
-.event-list-container h3 {
-    font-family:"Bricolage Grotesque";
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: var(--text-dark);
-}
-.event-item {
-    background: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    border-left: 5px solid var(--accent);
+.neu-date-cell.has-event {
     cursor: pointer;
-    transition: transform 0.2s;
+    border: 2px solid transparent;
 }
-.event-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.neu-date-cell.has-event .neu-event-dot {
+    display: block;
 }
-.event-item h4 {
-    margin: 0;
-    font-size: 16px;
+.neu-date-cell.has-event:hover {
+    border-color: var(--accent);
+}
+
+/* --- SIDE PANEL (NOTES) --- */
+.side-panel-trigger {
+    position: absolute;
+    left: -10px; /* Stick out slightly */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 80px;
+    background: var(--neu-bg);
+    border-radius: 0 15px 15px 0;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: left 0.3s;
+}
+.side-panel-trigger i {
+    color: var(--accent);
+    font-size: 24px;
+    animation: pointRight 1.5s infinite;
+}
+@keyframes pointRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+.event-side-panel {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: -400px; /* Hidden initially */
+    width: 350px;
+    background: var(--neu-bg);
+    border-radius: 20px;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+    z-index: 99;
+    padding: 30px;
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+.event-side-panel.open {
+    left: 20px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+.panel-header h3 {
+    font-family: "Bricolage Grotesque";
+    font-size: 24px;
     color: var(--text-dark);
-    font-weight: 700;
 }
-.event-item p {
-    margin: 5px 0 0;
+.close-panel-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close-panel-btn:hover { color: var(--accent); }
+
+.panel-content {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+/* Note Item Style inside Panel */
+.note-item {
+    background: var(--neu-bg);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    /* Inset shadow for "pressed" note look */
+    box-shadow: inset 3px 3px 7px var(--neu-shadow-dark), 
+                inset -3px -3px 7px var(--neu-shadow-light);
+}
+.note-item h4 {
+    color: var(--accent);
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+.note-item .meta {
     font-size: 12px;
     color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.note-item p {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.5;
 }
 
 /* DETAIL PAGES GENERIC */
@@ -1460,6 +1571,18 @@ body{
         height: 70px;
     }
     .big-metal-button i { font-size: 28px; }
+    
+    /* Calendar Responsive */
+    .neu-calendar-container {
+        padding: 20px;
+        height: auto;
+        min-height: auto;
+    }
+    .neu-title-group h2 { font-size: 2rem; }
+    .neu-date-cell { min-height: 60px; font-size: 1rem; }
+    .neu-grid-header { font-size: 0.8rem; }
+    .event-side-panel { width: 85%; left: -100%; }
+    .side-panel-trigger { width: 40px; height: 60px; }
 }
 
 </style>
@@ -1743,37 +1866,43 @@ body{
 </div>
 
 <div id="calendar" class="page">
-    <h2>🗓️ Event & Kompetisi Promed 2025</h2>
-    <p>Pameran, workshop, dan event tahunan Produksi Media.</p>
+    
+    <div class="neu-calendar-container">
+        
+        <div class="side-panel-trigger" onclick="toggleSidePanel()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
 
-    <div class="calendar-wrapper">
-        <div class="calendar-header">
-            <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
-            <div class="calendar-title" id="monthYearTitle"></div>
-            <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
-        </div>
-          
-        <div class="calendar-grid">
-            <div class="calendar-day-name">Sen</div>
-            <div class="calendar-day-name">Sel</div>
-            <div class="calendar-day-name">Rab</div>
-            <div class="calendar-day-name">Kam</div>
-            <div class="calendar-day-name">Jum</div>
-            <div class="calendar-day-name">Sab</div>
-            <div class="calendar-day-name">Min</div>
-        </div>
-          
-        <div class="calendar-grid" id="calendarDates">
+        <div id="eventSidePanel" class="event-side-panel">
+            <div class="panel-header">
+                <h3>Detail Kegiatan</h3>
+                <button class="close-panel-btn" onclick="closeSidePanel()"><i class="fas fa-times"></i></button>
             </div>
+            <div class="panel-content" id="sidePanelContent">
+                <p style="color:var(--muted);">Pilih tanggal atau klik icon segitiga untuk melihat agenda.</p>
+            </div>
+        </div>
 
+        <div class="neu-header">
+            <div class="neu-title-group">
+                <h2 id="neuMonthYear">November 2025</h2>
+                <p>Events & Schedule</p>
+            </div>
+            <div class="neu-nav-group">
+                <button class="neu-nav-btn" id="neuPrevMonth"><i class="fas fa-chevron-left"></i></button>
+                <button class="neu-nav-btn" id="neuNextMonth"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="neu-grid-header">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        </div>
+        <div class="neu-grid-dates" id="neuCalendarGrid">
+            </div>
+        
     </div>
 
-    <div class="event-list-container">
-        <h3>Kegiatan Mendatang</h3>
-        <div id="eventList">
-            </div>
-    </div>
-    <button class="step" data-page="home" style="margin-top: 40px;">Kembali ke Home</button>
+    <button class="step" data-page="home" style="margin-top: 30px;">Kembali ke Home</button>
 </div>
 
 <div id="event-detail" class="page">
@@ -2492,7 +2621,7 @@ document.addEventListener('DOMContentLoaded', () => {
 worksList.addEventListener('scroll', checkScrollPosition);
 
 
-// EVENTS & CALENDAR
+// EVENTS & CALENDAR (Updated Logic for Neumorphic)
 const eventsData = [
     { id: 'prorientation', name: 'Prorientation', dates: [new Date('2025-08-21'), new Date('2025-11-03')], monthDisplay: 'Agustus - November', place: 'Auditorum Vokasi', organizer: 'HIMPRODIA UI', description: 'Prorientation adalah suatu acara Masa Bimbingan Produksi Media.', ig: 'prorientation.ui', igLink: 'https://www.instagram.com/prorientation.ui?igsh=NjZoOWhzOGdxejR0' },
     { id: 'promed_olympic', name: 'Promed Olympic', dates: [new Date('2025-10-31'), new Date('2025-11-12')], monthDisplay: 'Oktober - November', place: 'Wira Yudha', organizer: 'Departemen Olahraga HIMPRODIA UI', description: 'Promed Olympic merupakan ajang perlombaan olahraga.', ig: 'promed.olympic', igLink: 'https://www.instagram.com/promed.olympic?igsh=MWhyMWFoaWozdWFhZA==' },
@@ -2503,11 +2632,6 @@ const eventsData = [
     { id: 'promates_market', name: 'Promates Market', dates: [new Date('2025-11-20')], monthDisplay: 'November', place: 'TBA', organizer: 'Departemen Ekonomi', description: 'Promates Market merupakan pasar preloved.', ig: 'promates.market', igLink: 'https://www.instagram.com/promates.market?igsh=MTRkdndycnJ2cDd0ZQ==' }
 ];
 
-const calendarDates = document.getElementById('calendarDates');
-const monthYearTitle = document.getElementById('monthYearTitle');
-const prevMonthBtn = document.getElementById('prevMonth');
-const nextMonthBtn = document.getElementById('nextMonth');
-const eventListContainer = document.getElementById('eventList');
 const monthNames = ["Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 const startMonth = 7; // Juli
 const endMonth = 12;  // Desember
@@ -2519,7 +2643,6 @@ function getEventDates(eventId) {
     const dates = event.dates.map(d => new Date(d.getTime()));
     if (dates.length === 1) return dates[0].toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     
-    // Logic sederhana untuk rentang
     const startDate = dates[0].toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     const endDate = dates[dates.length - 1].toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     return `${startDate} - ${endDate}`;
@@ -2538,104 +2661,120 @@ function showEventDetail(eventId) {
     navigateToPage('event-detail');
 }
 
-function renderCalendar(monthOffset) {
+// --- NEUMORPHIC CALENDAR LOGIC ---
+
+const neuCalendarGrid = document.getElementById('neuCalendarGrid');
+const neuMonthYear = document.getElementById('neuMonthYear');
+const sidePanelContent = document.getElementById('sidePanelContent');
+const eventSidePanel = document.getElementById('eventSidePanel');
+
+function renderNeuCalendar(monthOffset) {
     const year = 2025;
     const month = startMonth + monthOffset;
+    
     if (month < startMonth || month > endMonth) return;
 
     const date = new Date(year, month - 1, 1);
     const lastDay = new Date(year, month, 0).getDate();
-    const firstDayIndex = date.getDay() === 0 ? 6 : date.getDay() - 1; 
+    const firstDayIndex = date.getDay() === 0 ? 6 : date.getDay() - 1; // Mod Monday start
 
-    monthYearTitle.textContent = `${monthNames[month - startMonth]} ${year}`;
-    calendarDates.innerHTML = '';
-    prevMonthBtn.disabled = month === startMonth;
-    nextMonthBtn.disabled = month === endMonth;
+    neuMonthYear.textContent = `${monthNames[month - startMonth]} ${year}`;
+    neuCalendarGrid.innerHTML = '';
 
+    // Previous Month Days (Empty or gray)
     for (let i = 0; i < firstDayIndex; i++) {
         const emptyCell = document.createElement('div');
-        emptyCell.classList.add('calendar-date', 'inactive');
-        calendarDates.appendChild(emptyCell);
+        emptyCell.classList.add('neu-date-cell', 'inactive');
+        neuCalendarGrid.appendChild(emptyCell);
     }
 
+    // Current Month Days
     for (let day = 1; day <= lastDay; day++) {
         const dayCell = document.createElement('div');
-        dayCell.classList.add('calendar-date');
+        dayCell.classList.add('neu-date-cell');
         dayCell.textContent = day;
 
         const currentDate = new Date(year, month - 1, day);
         currentDate.setHours(0, 0, 0, 0);
 
-        const hasEvent = eventsData.some(event => {
+        // Check Events
+        const relevantEvents = eventsData.filter(event => {
             const isSingleDate = event.dates.length === 1 && event.dates[0].getTime() === currentDate.getTime();
             const isInRange = event.dates.length > 1 && currentDate >= event.dates[0] && currentDate <= event.dates[event.dates.length - 1];
             return isSingleDate || isInRange;
         });
 
-        if (hasEvent) {
-            dayCell.classList.add('event-date');
-            const eventDot = document.createElement('div');
-            eventDot.classList.add('event-dot');
-            dayCell.appendChild(eventDot);
-             
-            dayCell.dataset.date = `${year}-${month}-${day}`;
-            dayCell.addEventListener('click', (e) => {
-                const clickedDate = e.target.dataset.date;
-                const relevantEvents = eventsData.filter(event => {
-                    return event.dates.some(d => {
-                          // Logic simplified for brevity
-                          return true; // Needs proper date check in full logic
-                    });
-                });
-                // For demo, just pick first relevant if exists, or find specific
-                const found = eventsData.find(ev => ev.dates.some(d => d.getDate() == day && d.getMonth() == (month-1)));
-                if(found) showEventDetail(found.id);
-            });
+        if (relevantEvents.length > 0) {
+            dayCell.classList.add('has-event');
+            const dot = document.createElement('div');
+            dot.classList.add('neu-event-dot');
+            dayCell.appendChild(dot);
+
+            // Click Handler -> Open Sidebar
+            dayCell.onclick = () => {
+                populateSidePanel(relevantEvents, day, monthNames[month - startMonth]);
+                openSidePanel();
+            };
         }
-        calendarDates.appendChild(dayCell);
+
+        neuCalendarGrid.appendChild(dayCell);
     }
-    renderEventList(month, year);
+
+    // Disable buttons logic (visual)
+    document.getElementById('neuPrevMonth').style.opacity = (month === startMonth) ? '0.5' : '1';
+    document.getElementById('neuNextMonth').style.opacity = (month === endMonth) ? '0.5' : '1';
 }
 
-function renderEventList(month, year) {
-    eventListContainer.innerHTML = '';
-    const eventsForList = [];
-    eventsData.forEach(event => {
-        const isRelevant = event.dates.some(date => date.getFullYear() === year && date.getMonth() === month - 1);
-        if (isRelevant && !eventsForList.some(e => e.id === event.id)) {
-             eventsForList.push(event);
-        }
+function populateSidePanel(events, day, monthName) {
+    let html = `<div style="margin-bottom:20px; font-weight:bold; font-size:1.2rem;">${day} ${monthName} 2025</div>`;
+    
+    events.forEach(evt => {
+        html += `
+            <div class="note-item" onclick="showEventDetail('${evt.id}')" style="cursor:pointer;">
+                <h4>${evt.name}</h4>
+                <div class="meta"><i class="fas fa-map-marker-alt"></i> ${evt.place}</div>
+                <p>${evt.description}</p>
+                <small style="color:var(--accent); margin-top:5px; display:block;">Klik untuk detail lengkap</small>
+            </div>
+        `;
     });
-
-    if (eventsForList.length === 0) {
-        eventListContainer.innerHTML = '<p style="color:var(--muted); text-align:center;">Tidak ada kegiatan terjadwal di bulan ini.</p>';
-        return;
-    }
-    eventsForList.sort((a, b) => a.dates[0] - b.dates[0]);
-
-    eventsForList.forEach(event => {
-        const item = document.createElement('div');
-        item.classList.add('event-item');
-        item.dataset.id = event.id;
-        item.innerHTML = `<h4>${event.name}</h4><p>${getEventDates(event.id)} | ${event.place.split(',')[0]}</p>`;
-        item.addEventListener('click', () => showEventDetail(event.id));
-        eventListContainer.appendChild(item);
-    });
+    sidePanelContent.innerHTML = html;
 }
 
-prevMonthBtn.addEventListener('click', () => {
+function toggleSidePanel() {
+    // If opening without specific date, show generic or all upcoming events
+    if (!eventSidePanel.classList.contains('open')) {
+         // Optional: Populate with "Upcoming events" if opening via triangle
+         // populateSidePanel(getAllUpcomingEvents(), 'Kegiatan', 'Mendatang');
+    }
+    eventSidePanel.classList.toggle('open');
+}
+
+function openSidePanel() {
+    eventSidePanel.classList.add('open');
+}
+
+function closeSidePanel() {
+    eventSidePanel.classList.remove('open');
+}
+
+// Button Listeners
+document.getElementById('neuPrevMonth').addEventListener('click', () => {
     if (currentMonthIndex > 0) {
         currentMonthIndex--;
-        renderCalendar(currentMonthIndex);
+        renderNeuCalendar(currentMonthIndex);
     }
 });
-nextMonthBtn.addEventListener('click', () => {
+document.getElementById('neuNextMonth').addEventListener('click', () => {
     if (currentMonthIndex < monthNames.length - 1) {
         currentMonthIndex++;
-        renderCalendar(currentMonthIndex);
+        renderNeuCalendar(currentMonthIndex);
     }
 });
-renderCalendar(currentMonthIndex);
+
+// Init
+renderNeuCalendar(currentMonthIndex);
+
 </script>
 </body>  
 </html>
