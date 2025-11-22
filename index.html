@@ -197,29 +197,31 @@ body{
 .step.active { background: var(--accent); box-shadow: 0 8px 15px rgba(22,82,255,0.4); transform: scale(1.05); }
 .step:hover:not(.active) { transform: scale(1.03); box-shadow: 0 6px 12px rgba(22,82,255,0.3); }
 
-/* --- NEW NEUMORPHIC CALENDAR STYLES --- */
+/* --- NEW NEUMORPHIC CALENDAR STYLES (COMPACT VERSION) --- */
 #calendar {
-    background-color: var(--neu-bg); /* Solid bg for neumorphism effect */
+    background-color: var(--neu-bg);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 40px 20px;
+    min-height: 100vh;
 }
 
 .neu-calendar-container {
     position: relative;
     width: 95%;
-    max-width: 1200px; /* Besar hampir full width */
-    min-height: 80vh;  /* Tinggi hampir full screen */
+    max-width: 900px;
+    min-height: auto;
     background: var(--neu-bg);
     border-radius: 30px;
-    /* Soft Neumorphic Shadow */
     box-shadow: 20px 20px 60px var(--neu-shadow-dark), 
                -20px -20px 60px var(--neu-shadow-light);
-    padding: 40px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* OVERFLOW HIDDEN DIHAPUS AGAR POPUP TIDAK TERPOTONG */
+    /* overflow: hidden; */ 
 }
 
 /* Header Section (Month/Year + Nav) */
@@ -227,31 +229,31 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding: 0 20px;
+    margin-bottom: 20px; 
+    padding: 0 10px;
 }
 
 .neu-title-group h2 {
     font-family: "Bricolage Grotesque";
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: var(--text-dark);
     margin: 0;
 }
 .neu-title-group p {
     color: var(--muted);
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .neu-nav-btn {
-    width: 50px;
-    height: 50px;
+    width: 40px; 
+    height: 40px;
     border-radius: 50%;
     border: none;
     background: var(--neu-bg);
     color: var(--text-dark);
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
-    margin-left: 15px;
+    margin-left: 10px;
     box-shadow: 5px 5px 10px var(--neu-shadow-dark), 
                -5px -5px 10px var(--neu-shadow-light);
     transition: all 0.2s ease;
@@ -268,35 +270,36 @@ body{
     transform: translateY(0);
 }
 
-/* Calendar Grid Big */
+/* Calendar Grid Compact */
 .neu-grid-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .neu-grid-dates {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 20px;
+    gap: 15px; 
     flex-grow: 1;
 }
 
 .neu-date-cell {
     background: var(--neu-bg);
-    border-radius: 20px;
-    min-height: 100px; /* Kotak besar */
+    border-radius: 15px; 
+    min-height: 70px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 15px;
-    font-size: 1.2rem;
+    padding-top: 10px;
+    font-size: 1rem; 
     font-weight: 600;
     color: var(--text-dark);
     position: relative;
@@ -318,11 +321,11 @@ body{
 
 /* Dot Biru untuk Event */
 .neu-event-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px; 
+    height: 8px;
     background-color: var(--accent);
     border-radius: 50%;
-    margin-top: 10px;
+    margin-top: 5px;
     box-shadow: 0 0 10px rgba(22, 82, 255, 0.5);
     display: none; /* Hidden by default */
 }
@@ -336,6 +339,51 @@ body{
 .neu-date-cell.has-event:hover {
     border-color: var(--accent);
 }
+
+/* --- POPUP HOVER STYLE (NEW) --- */
+.event-popup {
+    position: absolute;
+    bottom: 110%; /* Muncul di atas tanggal */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--text-dark);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    white-space: normal;
+    width: max-content;
+    max-width: 180px;
+    text-align: center;
+    pointer-events: none; /* Agar tidak mengganggu klik */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    line-height: 1.3;
+}
+
+/* Arrow kecil di bawah popup */
+.event-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--text-dark) transparent transparent transparent;
+}
+
+/* Trigger saat hover */
+.neu-date-cell.has-event:hover .event-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
 
 /* --- SIDE PANEL (NOTES) --- */
 .side-panel-trigger {
@@ -438,8 +486,8 @@ body{
     line-height: 1.5;
 }
 
-/* DETAIL PAGES GENERIC */
-#event-detail, #work-detail, #promed-nav, #promed-about-detail, #promed-peminatan-detail, #peminatan-single-detail-temp, #dosen {
+/* DETAIL PAGES GENERIC (UPDATED to include #fasilitas) */
+#event-detail, #work-detail, #promed-nav, #promed-about-detail, #promed-peminatan-detail, #peminatan-single-detail-temp, #dosen, #fasilitas {
     padding: 80px 20px;
     min-height: 100vh;
     display: flex;
@@ -727,6 +775,41 @@ body{
 }
 .dosen-social-links a:hover {
     color: var(--accent);
+}
+
+/* FASILITAS STYLE FIX */
+.facility-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.facility-card h2 {
+    font-family: "Bricolage Grotesque";
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+.facility-image-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--muted);
+    border: 2px dashed #ccc;
+}
+.facility-card p {
+    text-align: justify;
+    line-height: 1.6;
 }
 
 /* Details */
@@ -1547,7 +1630,7 @@ body{
       transform: translateX(-50%) translateY(30px) scale(0.85);
       opacity: 0.7;
   }
-    
+     
   .card-front img {
     width: 80px;
     height: 80px;
@@ -1571,7 +1654,7 @@ body{
         height: 70px;
     }
     .big-metal-button i { font-size: 28px; }
-    
+     
     /* Calendar Responsive */
     .neu-calendar-container {
         padding: 20px;
@@ -1600,9 +1683,9 @@ body{
 
 <div id="spinWheelOverlay" class="spin-ui">
     <div class="close-spin" onclick="closeSpinUI()"><i class="fas fa-times"></i></div>
-    
+     
     <h2>Spin The Music!</h2>
-    
+     
     <div class="retro-metal-frame">
         
         <div class="screen-container screen-left" id="spinScreenLeft">
@@ -1635,7 +1718,7 @@ body{
 </div>
 
 <div id="home" class="page active">
-    
+     
   <div class="landing-section">
       <div class="landing-content">
           <div class="logo-mark" style="width: 60px; height: 60px; margin: 0 auto 20px; font-size: 24px;">PZ</div>
@@ -1659,7 +1742,7 @@ body{
                        S 450 250, 500 150 
                        C 550 50, 650 50, 700 150
                        S 850 250, 900 150" />
-                
+                 
               <path class="roadmap-dashed-outline" 
                     d="M 100 150 
                        C 150 50, 250 50, 300 150 
@@ -1866,7 +1949,7 @@ body{
 </div>
 
 <div id="calendar" class="page">
-    
+     
     <div class="neu-calendar-container">
         
         <div class="side-panel-trigger" onclick="toggleSidePanel()">
@@ -2697,11 +2780,12 @@ function renderNeuCalendar(monthOffset) {
         const currentDate = new Date(year, month - 1, day);
         currentDate.setHours(0, 0, 0, 0);
 
-        // Check Events
+        // Check Events (MODIFIED LOGIC: Hanya tanggal pertama/awal yang dapat dot biru)
         const relevantEvents = eventsData.filter(event => {
-            const isSingleDate = event.dates.length === 1 && event.dates[0].getTime() === currentDate.getTime();
-            const isInRange = event.dates.length > 1 && currentDate >= event.dates[0] && currentDate <= event.dates[event.dates.length - 1];
-            return isSingleDate || isInRange;
+            const startDate = new Date(event.dates[0]);
+            startDate.setHours(0, 0, 0, 0);
+            // Cek apakah tanggal kalender sama dengan tanggal mulai event
+            return currentDate.getTime() === startDate.getTime();
         });
 
         if (relevantEvents.length > 0) {
@@ -2709,6 +2793,12 @@ function renderNeuCalendar(monthOffset) {
             const dot = document.createElement('div');
             dot.classList.add('neu-event-dot');
             dayCell.appendChild(dot);
+            
+            // --- NEW: Create Popup ---
+            const popup = document.createElement('div');
+            popup.classList.add('event-popup');
+            popup.innerText = relevantEvents[0].name; // Menampilkan nama event pertama
+            dayCell.appendChild(popup);
 
             // Click Handler -> Open Sidebar
             dayCell.onclick = () => {
