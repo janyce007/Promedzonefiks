@@ -954,6 +954,10 @@ button.step:hover {
   transition:transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
   opacity:0.6;
   padding:20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .card-testi img {
   width:80px;height:80px;
@@ -1808,11 +1812,11 @@ button.step:hover {
     <h2>Testimoni Mahasiswa & Alumni</h2>
     <p class="sub">Pendapat mereka tentang pengalaman belajar di Produksi Media.</p>
     <div class="slider-3d-testimoni" id="sliderTesti">
-      <div class="card-testi active"><img src="https://via.placeholder.com/150"><h3>Arka Pratama</h3><p>"Promed ngajarin aku gimana bikin konten kreatif yang relevan dengan industri masa kini."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/150"><h3>Salsabila N.</h3><p>"Dosen-dosennya inspiratif banget! Kita diajarin langsung sama praktisi dunia media."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/150"><h3>Rian Saputra</h3><p>"Lingkungan belajarnya seru, banyak kolaborasi dan project nyata."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/150"><h3>Ayu Wulandari</h3><p>"Setiap semester selalu ada karya yang bisa dibanggakan buat portofolio."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/150"><h3>Kevin H.</h3><p>"Kuliah di Promed bener-bener bantu aku siap kerja di industri kreatif."</p></div>
+      <div class="card-testi active"><h3>Arka Pratama</h3><p>"Promed ngajarin aku gimana bikin konten kreatif yang relevan dengan industri masa kini."</p></div>
+      <div class="card-testi"><h3>Salsabila N.</h3><p>"Dosen-dosennya inspiratif banget! Kita diajarin langsung sama praktisi dunia media."</p></div>
+      <div class="card-testi"><h3>Rian Saputra</h3><p>"Lingkungan belajarnya seru, banyak kolaborasi dan project nyata."</p></div>
+      <div class="card-testi"><h3>Ayu Wulandari</h3><p>"Setiap semester selalu ada karya yang bisa dibanggakan buat portofolio."</p></div>
+      <div class="card-testi"><h3>Kevin H.</h3><p>"Kuliah di Promed bener-bener bantu aku siap kerja di industri kreatif."</p></div>
     </div>
   </div>
 
@@ -2013,7 +2017,6 @@ button.step:hover {
 </div>
 
 <div id="event-detail" class="page">
-    <button class="step" data-page="calendar" style="margin-top: 0; align-self: flex-start;">Kembali ke Kalender</button>
     <div class="detail-card">
         <h2 id="detailTitle">Judul Acara</h2>
           
@@ -2028,6 +2031,7 @@ button.step:hover {
             <p>Info lebih lanjut: <a href="#" id="detailIgLink" target="_blank"><i class="fab fa-instagram"></i> <span id="detailIgName"></span></a></p>
         </div>
     </div>
+    <button class="step" data-page="calendar" style="margin-top: 40px;">Kembali ke Kalender</button>
 </div>
 
 <div id="karya" class="page">
@@ -2429,22 +2433,22 @@ function animateArch() {
 // Updated with specific music data from user
 const worksData = [
     // -- 12 LAGU BARU --
-    { id: 'arteeich_ever', title: 'Ever', category: 'Arteeich - Musik', type: 'music', status: 'Aktif', description: 'Lagu Ever oleh Arteeich.', mediaType: 'music', youtubeId: '4Q9zHVsCQ-8', youtubeLink: 'https://youtu.be/4Q9zHVsCQ-8' },
+    { id: 'arteeich_ever', title: 'Ever', category: 'Arteeich - Musik', type: 'music', status: 'Aktif', description: 'Lagu Ever oleh Arteeich.', mediaType: 'music', youtubeId: '4Q9zHVsCQ-8', youtubeLink: 'https://youtu.be/4Q9zHVsCQ-8', igLink: 'https://www.instagram.com/arteeich/' },
     
-    { id: 'juzzer_buku', title: 'Buku Pesta Cinta', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Buku Pesta Cinta oleh Juzzer.', mediaType: 'music', youtubeId: '9HhlxZ9X3hE', youtubeLink: 'https://youtu.be/9HhlxZ9X3hE' },
-    { id: 'juzzer_perempuan', title: 'Apakah Aku Harus Berubah Menjadi Perempuan', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Apakah Aku Harus Berubah Menjadi Perempuan oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw' },
-    { id: 'juzzer_asam', title: 'Asam Manis', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Asam Manis oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw' },
-    { id: 'juzzer_akukau', title: 'Aku Kau dan Musik', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Aku Kau dan Musik oleh Juzzer.', mediaType: 'music', youtubeId: 'poZUlQ7I7h4', youtubeLink: 'https://youtu.be/poZUlQ7I7h4' },
-    { id: 'juzzer_heykau', title: 'Hey Kau Gadis Nan Jauh Disana', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hey Kau Gadis Nan Jauh Disana oleh Juzzer.', mediaType: 'music', youtubeId: 'zWXvpkdwedY', youtubeLink: 'https://youtu.be/zWXvpkdwedY' },
+    { id: 'juzzer_buku', title: 'Buku Pesta Cinta', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Buku Pesta Cinta oleh Juzzer.', mediaType: 'music', youtubeId: '9HhlxZ9X3hE', youtubeLink: 'https://youtu.be/9HhlxZ9X3hE', igLink: 'https://www.instagram.com/juzzer.music/' },
+    { id: 'juzzer_perempuan', title: 'Apakah Aku Harus Berubah Menjadi Perempuan', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Apakah Aku Harus Berubah Menjadi Perempuan oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw', igLink: 'https://www.instagram.com/juzzer.music/' },
+    { id: 'juzzer_asam', title: 'Asam Manis', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Asam Manis oleh Juzzer.', mediaType: 'music', youtubeId: 'rJKbeRe2nvw', youtubeLink: 'https://youtu.be/rJKbeRe2nvw', igLink: 'https://www.instagram.com/juzzer.music/' },
+    { id: 'juzzer_akukau', title: 'Aku Kau dan Musik', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Aku Kau dan Musik oleh Juzzer.', mediaType: 'music', youtubeId: 'poZUlQ7I7h4', youtubeLink: 'https://youtu.be/poZUlQ7I7h4', igLink: 'https://www.instagram.com/juzzer.music/' },
+    { id: 'juzzer_heykau', title: 'Hey Kau Gadis Nan Jauh Disana', category: 'Juzzer - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hey Kau Gadis Nan Jauh Disana oleh Juzzer.', mediaType: 'music', youtubeId: 'zWXvpkdwedY', youtubeLink: 'https://youtu.be/zWXvpkdwedY', igLink: 'https://www.instagram.com/juzzer.music/' },
     
-    { id: 'sh_alleen', title: 'Alleen', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Alleen oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'mMdXWIQ4ppU', youtubeLink: 'https://youtu.be/mMdXWIQ4ppU' },
-    { id: 'sh_firstlook', title: 'First Look', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu First Look oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8MFqPf4c9jg', youtubeLink: 'https://youtu.be/8MFqPf4c9jg' },
-    { id: 'sh_tryagain', title: 'Try Again', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Try Again oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'aeI7lVT-mMA', youtubeLink: 'https://youtu.be/aeI7lVT-mMA' },
-    { id: 'sh_hideaway', title: 'Hideaway', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hideaway oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8GbPy8YtRiE', youtubeLink: 'https://youtu.be/8GbPy8YtRiE' },
+    { id: 'sh_alleen', title: 'Alleen', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Alleen oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'mMdXWIQ4ppU', youtubeLink: 'https://youtu.be/mMdXWIQ4ppU', igLink: 'https://www.instagram.com/secrethideaway/' },
+    { id: 'sh_firstlook', title: 'First Look', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu First Look oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8MFqPf4c9jg', youtubeLink: 'https://youtu.be/8MFqPf4c9jg', igLink: 'https://www.instagram.com/secrethideaway/' },
+    { id: 'sh_tryagain', title: 'Try Again', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Try Again oleh Secret Hideaway.', mediaType: 'music', youtubeId: 'aeI7lVT-mMA', youtubeLink: 'https://youtu.be/aeI7lVT-mMA', igLink: 'https://www.instagram.com/secrethideaway/' },
+    { id: 'sh_hideaway', title: 'Hideaway', category: 'Secret Hideaway - Musik', type: 'music', status: 'Aktif', description: 'Lagu Hideaway oleh Secret Hideaway.', mediaType: 'music', youtubeId: '8GbPy8YtRiE', youtubeLink: 'https://youtu.be/8GbPy8YtRiE', igLink: 'https://www.instagram.com/secrethideaway/' },
     
-    { id: 'sd_givein', title: 'Give In To The Groove', category: 'Sarjana Disko - Musik', type: 'music', status: 'Aktif', description: 'Lagu Give In To The Groove oleh Sarjana Disko.', mediaType: 'music', youtubeId: '7rkB7-zWjxA', youtubeLink: 'https://youtu.be/7rkB7-zWjxA' },
+    { id: 'sd_givein', title: 'Give In To The Groove', category: 'Sarjana Disko - Musik', type: 'music', status: 'Aktif', description: 'Lagu Give In To The Groove oleh Sarjana Disko.', mediaType: 'music', youtubeId: '7rkB7-zWjxA', youtubeLink: 'https://youtu.be/7rkB7-zWjxA', igLink: 'https://www.instagram.com/sarjanadisko/' },
     
-    { id: 'cp_wherever', title: 'Wherever The Wind Take Us', category: 'Charmless Pals - Musik', type: 'music', status: 'Aktif', description: 'Lagu Wherever The Wind Take Us oleh Charmless Pals.', mediaType: 'music', youtubeId: 'PbQ9KoLncWc', youtubeLink: 'https://youtu.be/PbQ9KoLncWc' },
+    { id: 'cp_wherever', title: 'Wherever The Wind Take Us', category: 'Charmless Pals - Musik', type: 'music', status: 'Aktif', description: 'Lagu Wherever The Wind Take Us oleh Charmless Pals.', mediaType: 'music', youtubeId: 'PbQ9KoLncWc', youtubeLink: 'https://youtu.be/PbQ9KoLncWc', igLink: 'https://www.instagram.com/charmlesspals/' },
 
     // -- KARYA LAINNYA (GAME/FILM) TETAP ADA --
     { id: 'fate', title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film' },
