@@ -180,7 +180,10 @@ body{
     transform: scale(1.1); 
 }
 
-.step { 
+/* --- UPDATED STYLE FOR STEPS --- */
+
+/* 1. TAMPILAN UNTUK ROADMAP (DIV) - TETAP KECIL/KOTAK */
+div.step { 
   background: var(--accent); 
   color: white; 
   padding: 8px 15px; 
@@ -191,11 +194,33 @@ body{
   white-space: nowrap; 
   font-size: 14px; 
   transition: transform .3s, box-shadow .3s, background .3s; 
-  transform: none !important; 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
 }
-.step.active { background: var(--accent); box-shadow: 0 8px 15px rgba(22,82,255,0.4); transform: scale(1.05); }
-.step:hover:not(.active) { transform: scale(1.03); box-shadow: 0 6px 12px rgba(22,82,255,0.3); }
+div.step.active { background: var(--accent); box-shadow: 0 8px 15px rgba(22,82,255,0.4); transform: scale(1.05); }
+div.step:hover:not(.active) { transform: scale(1.03); box-shadow: 0 6px 12px rgba(22,82,255,0.3); }
+
+/* 2. TAMPILAN UNTUK TOMBOL (BUTTON) - MENGIKUTI GAYA EXPLORE-BTN */
+button.step {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 15px 35px; /* Sedikit disesuaikan agar tidak terlalu besar di header */
+    border-radius: 50px; /* Bentuk Pill/Oval */
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* GLOW EFFECT */
+    box-shadow: 0 0 20px rgba(22, 82, 255, 0.6), 0 0 0 4px rgba(22, 82, 255, 0.2);
+    transition: all 0.3s ease;
+}
+button.step:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(22, 82, 255, 0.9), 0 0 0 6px rgba(22, 82, 255, 0.4);
+    background: #306aff;
+}
 
 /* --- NEW NEUMORPHIC CALENDAR STYLES (COMPACT VERSION) --- */
 #calendar {
@@ -220,8 +245,6 @@ body{
     padding: 30px;
     display: flex;
     flex-direction: column;
-    /* OVERFLOW HIDDEN DIHAPUS AGAR POPUP TIDAK TERPOTONG */
-    /* overflow: hidden; */ 
 }
 
 /* Header Section (Month/Year + Nav) */
@@ -388,7 +411,8 @@ body{
 /* --- SIDE PANEL (NOTES) --- */
 .side-panel-trigger {
     position: absolute;
-    left: -10px; /* Stick out slightly */
+    /* DIGESER LEBIH JAUH KE KIRI AGAR TIDAK MENUTUPI TEKS */
+    left: -60px; 
     top: 50%;
     transform: translateY(-50%);
     width: 50px;
