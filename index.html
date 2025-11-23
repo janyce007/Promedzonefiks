@@ -78,7 +78,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('background.jpg/Promed - 4.JPG') no-repeat center center;
+    background: url('background.jpg/Promed.JPG') no-repeat center center;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -301,7 +301,7 @@ button.step:hover {
 #dosen { padding: 0; }
 .dosen-arch-wrapper { 
     width: 100%; 
-    height: 100%; 
+    height: ; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -309,7 +309,7 @@ button.step:hover {
     /* UPDATED BACKGROUND TO BLUE GRADIENT (SAME AS ABOUT US) */
     background: linear-gradient(135deg, var(--bg-about) 0%, #2a4cb8 40%, #3b6aff 100%); 
     color: white; 
-    padding: 20px; 
+    padding: 40px 20px; 
     position: relative; 
     overflow: hidden; 
 }
@@ -333,11 +333,69 @@ button.step:hover {
 .dosen-social-links a { color: var(--muted); font-size: 1.2rem; transition: color 0.2s; display: flex; align-items: center; }
 .dosen-social-links a:hover { color: var(--accent); }
 
-/* FASILITAS */
-.facility-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 800px; width: 100%; margin-bottom: 20px; text-align: center; }
-.facility-card h2 { font-family: "Bricolage Grotesque"; font-size: 32px; color: var(--accent); margin-bottom: 20px; }
-.facility-image-placeholder { width: 100%; height: 250px; background-color: #eee; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-weight: 600; color: var(--muted); border: 2px dashed #ccc; }
-.facility-card p { text-align: justify; line-height: 1.6; }
+/* --- FINAL CSS FASILITAS: MENTOK 1 LAYAR, GAMBAR PAS, TEKS ESTETIK --- */
+
+/* 1. Kunci Halaman Agar Pas 1 Layar (Gak Bisa Scroll) */
+#fasilitas {
+    height: 100vh !important;           /* Tinggi paksa segede layar */
+    min-height: 100vh !important;
+    overflow: hidden !important;        /* Matikan scroll halaman */
+    padding-top: 80px !important;       /* Jarak dari navbar */
+    padding-bottom: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Konten otomatis ke tengah vertikal */
+    align-items: center !important;     /* Konten otomatis ke tengah horizontal */
+}
+
+/* 2. Atur Kartu Wadahnya */
+#fasilitas .facility-card {
+    max-width: 900px !important;
+    width: 90% !important;
+    padding: 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    /* Agar jika layar sangat pendek, konten dalam kartu tetap aman */
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important; /* Shadow lebih halus */
+}
+
+/* Judul Estetik */
+#fasilitas h2 {
+    font-family: "Bricolage Grotesque", sans-serif !important;
+    font-size: 32px !important;
+    color: var(--accent) !important;
+    margin-bottom: 25px !important;
+}
+
+/* 3. GAMBAR DIBESARKAN DIKIT (Sesuai Request) */
+#fasilitas img {
+    height: 320px !important;           /* Ukuran fixed yang lebih besar dari sebelumnya */
+    width: auto !important;             /* Lebar menyesuaikan agar tidak gepeng */
+    max-width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 20px !important;     /* Sudut lebih membulat */
+    margin-bottom: 30px !important;     /* Jarak ke teks */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+
+/* 4. TEKS ESTETIK (Rata Kanan-Kiri & Spasi Lega) */
+#fasilitas p {
+    font-size: 16px !important;         /* Ukuran pas untuk dibaca */
+    line-height: 1.8 !important;        /* Jarak antar baris lebih lega (estetik) */
+    text-align: justify !important;     /* Rata kanan kiri */
+    color: var(--text-dark) !important;
+    margin-bottom: 0 !important;
+    width: 95% !important;              /* Biar teks tidak terlalu mepet pinggir kartu */
+}
+
+/* 5. Tombol Kembali */
+#fasilitas button.step {
+    margin-top: 35px !important;        /* Jarak dari teks ke tombol */
+    margin-bottom: 0 !important;
+}
 
 /* Details */
 .detail-info { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
@@ -530,6 +588,458 @@ button.step:hover {
     line-height: 1.6;
     margin-bottom: 20px;
 }
+#promed-peminatan-detail {
+    justify-content: flex-start !important;
+    padding-top: 130px !important;
+    padding-bottom: 50px !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+#promed-peminatan-detail .peminatan-list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+    max-width: 1000px !important;
+    margin-top: 20px !important;
+}
+#promed-peminatan-detail .peminatan-item-box {
+    background-color: var(--accent-2) !important;
+    border-radius: 20px !important;
+    height: 180px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+#promed-peminatan-detail .content p, 
+#promed-peminatan-detail .hover-popup { display: none !important; }
+
+
+/* 2. BENERIN FASILITAS (Tetap Sama: Mentok 1 Layar) */
+#fasilitas {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+#fasilitas .facility-card {
+    max-width: 900px !important;
+    width: 85% !important;
+    padding: 30px !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    margin-top: 60px !important;
+}
+#fasilitas img {
+    height: 220px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    margin-bottom: 20px !important;
+}
+#fasilitas p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin-bottom: 0 !important;
+}
+#fasilitas button.step { margin-top: 20px !important; margin-bottom: 0 !important; }
+
+
+/* 3. BENERIN GALERI KARYA (INI YANG DIUBAH JADI PORTRAIT) */
+/* Lebar kartu dikecilin dikit biar proporsional sama tinggi portrait */
+.work-card-wrapper { width: 240px !important; } 
+.work-card { background-color: transparent !important; box-shadow: none !important; }
+
+.work-card-image {
+    width: 100% !important;
+    /* KUNCINYA DI SINI: Diubah jadi 2 banding 3 (Ukuran Poster/Portrait) */
+    aspect-ratio: 2 / 3 !important; 
+    height: auto !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+.work-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Biar gambar kepotong rapi kalo rasionya beda dikit */
+}
+
+/* Update untuk layar laptop */
+@media (min-width: 768px) {
+    .work-card-wrapper { width: 260px !important; }
+    .work-card-image { height: auto !important; } 
+}
+#promed-about-detail {
+    position: fixed !important;  /* KUNCI MATI POSISI BIAR GAK GERAK */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    overflow: hidden !important; /* HILANGKAN SCROLL HALAMAN */
+    padding: 0 !important;       /* RESET SEMUA JARAK */
+    margin: 0 !important;
+    z-index: 9999 !important;    /* Pastikan dia paling depan */
+    
+    /* Tengahin Konten */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); /* Pastikan background ada */
+}
+
+/* Atur Tombol Kembali */
+#promed-about-detail .step {
+    margin: 0 0 20px 0 !important; /* Kasih jarak dikit ke bawah */
+    flex-shrink: 0 !important;     /* Biar tombol gak gepeng */
+}
+
+/* Atur Kotak Putih Penjelasannya */
+#promed-about-detail .detail-card {
+    width: 90% !important;
+    max-width: 800px !important;
+    
+    /* Ini kuncinya: Tinggi maksimal kotak cuma 70% layar */
+    max-height: 70vh !important;   
+    
+    /* Kalau teks kepanjangan, scrollnya DI DALAM KOTAK, bukan di halaman */
+    overflow-y: auto !important;   
+    
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+#calendar {
+    height: 100vh !important;           /* Paksa tinggi pas 1 layar */
+    min-height: 100vh !important;
+    overflow: hidden !important;        /* MATIKAN SCROLL HALAMAN */
+    padding: 0 !important;              /* Reset padding */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Tengah Vertikal */
+    align-items: center !important;     /* Tengah Horizontal */
+    background-color: var(--neu-bg) !important; /* Warna background abu */
+    position: fixed !important;         /* Kunci posisi biar ga lari */
+    top: 0; left: 0; width: 100%;
+    z-index: 100;
+}
+
+/* Atur Kotak Kalendernya */
+#calendar .neu-calendar-container {
+    width: 90% !important;
+    max-width: 900px !important;
+    
+    /* Batasi tinggi kalender maksimal 80% layar */
+    max-height: 80vh !important;        
+    
+    /* Kalau layar pendek bgt, scroll muncul DI DALAM kalender */
+    overflow-y: auto !important;        
+    
+    margin: 0 !important;
+    padding: 30px !important;
+}
+
+/* Atur Tombol Kembali */
+#calendar button.step {
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+    transform: scale(0.9) !important;   /* Kecilin tombol dikit biar muat */
+}
+#fasilitas {
+    position: fixed !important;     /* KUNCI POSISI BIAR GAK GERAK */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;       /* Tinggi pas 1 layar */
+    overflow: hidden !important;    /* MATIKAN SCROLL HALAMAN */
+    padding: 0 !important;          /* Reset jarak */
+    z-index: 100 !important;
+    
+    /* Tengahin Konten */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* Pastikan backgroundnya tetap ada (gradasi) */
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2)) !important;
+}
+
+/* Atur Kotak Putihnya */
+#fasilitas .facility-card {
+    width: 85% !important;
+    max-width: 900px !important;
+    padding: 30px !important;
+    
+    /* Batasi tinggi kotak maksimal 75% layar */
+    max-height: 75vh !important;    
+    
+    /* Kalau konten kepanjangan, scroll CUMA DI DALAM KOTAK */
+    overflow-y: auto !important;    
+    
+    margin-top: 40px !important;    /* Jarak aman dari atas */
+}
+
+/* Atur Gambar Biar Gak Kegedean */
+#fasilitas img {
+    height: 25vh !important;        /* Tinggi gambar nyesuain layar (25%) */
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Atur Tombol Kembali */
+#fasilitas button.step {
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+}
+#promed-nav {
+    position: fixed !important;     /* KUNCI POSISI BIAR GAK GERAK */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;       /* Tinggi pas 1 layar */
+    overflow: hidden !important;    /* MATIKAN SCROLL */
+    padding: 0 !important;          /* Reset jarak */
+    z-index: 100 !important;
+    
+    /* Tengahin Konten */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* Pastikan background tetap ada */
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2)) !important;
+}
+
+/* Atur Judul biar gak terlalu nempel atas */
+#promed-nav h2 {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+}
+
+/* Atur Jarak Icon Pilihan */
+#promed-nav .nav-icon-container {
+    margin-top: 30px !important;
+    margin-bottom: 40px !important;
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+}
+
+/* Atur Tombol Kembali */
+#promed-nav button.step {
+    margin-top: 0 !important;
+}
+#dosen {
+    height: auto !important;        /* Tinggi bebas */
+    min-height: 100vh !important;
+    overflow-y: auto !important;    /* AKTIFKAN SCROLL */
+    overflow-x: hidden !important;
+    display: block !important;      /* Susun ke bawah */
+    padding: 0 !important;
+    background: none !important;
+}
+
+/* 2. BAGIAN ATAS: RODA PUTAR (Background Biru) */
+.dosen-arch-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Background Biru Gradasi */
+    background: linear-gradient(135deg, var(--bg-about) 0%, #2a4cb8 40%, #3b6aff 100%) !important;
+    color: white !important;
+    height: 100vh !important;       /* Full 1 Layar buat Roda */
+    width: 100% !important;
+    padding: 40px 20px !important;
+    position: relative !important;
+}
+
+.dosen-arch-wrapper h2 {
+    font-family: "Bricolage Grotesque", sans-serif !important;
+    font-size: 48px !important;
+    color: white !important;        /* Teks Putih */
+    margin-bottom: 10px !important;
+}
+.dosen-arch-wrapper p {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 16px !important;
+}
+
+/* Munculkan Animasi Roda */
+#dosen-arch-scene, .arch-scene {
+    display: flex !important;
+    width: 100% !important;
+    height: 500px !important;
+    margin-top: 20px !important;
+}
+.arch-item {
+    display: block !important;      /* Pastikan kartu roda muncul */
+}
+.scroll-indicator {
+    display: block !important;      /* Panah penunjuk scroll muncul */
+    color: white !important;
+}
+
+
+/* 3. BAGIAN BAWAH: GRID FOTO DOSEN (Background Krem) */
+.dosen-grid-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 80px 20px 60px !important;
+    /* Background Krem/Putih */
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2)) !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* Judul Section Bawah */
+.dosen-grid-wrapper h2 {
+    display: block !important;
+    color: var(--text-dark) !important;
+    font-size: 36px !important;
+    margin-bottom: 10px !important;
+}
+.dosen-grid-wrapper p {
+    display: block !important;
+    color: var(--muted) !important;
+    margin-bottom: 40px !important;
+}
+
+/* Grid Kartu */
+.dosen-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+}
+
+/* Style Kartu Dosen */
+.dosen-card {
+    background: white !important;
+    padding: 15px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+    text-align: center !important;
+}
+.dosen-image-real, .dosen-image-placeholder {
+    height: 150px !important;
+    margin-bottom: 10px !important;
+}
+.dosen-card h4 {
+    color: var(--text-dark) !important;
+    font-size: 16px !important;
+}
+
+/* Tombol Kembali */
+.dosen-grid-wrapper .step {
+    margin-top: 40px !important;
+}#karya {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    overflow: hidden !important; /* Gak bisa scroll */
+    z-index: 100 !important;
+    padding: 0 !important;
+    
+    /* KITA PAKAI FLEX BIAR RAPI DI TENGAH */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; 
+    align-items: center !important;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2)) !important;
+}
+
+/* 1. JUDUL (Kita rapetin ke atas) */
+#karya h2 {
+    font-size: 30px !important;
+    margin-top: 60px !important;    /* Jarak dari atap layar */
+    margin-bottom: 5px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;      /* Jangan sampe gepeng */
+}
+#karya p {
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+    flex-shrink: 0 !important;
+}
+.work-filter-tabs {
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+    transform: scale(0.9) !important; /* Kecilin tombol filter dikit */
+}
+
+/* 2. AREA KARTU (INI KUNCINYA: KITA KECILIN JADI 75%) */
+.gallery-container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    
+    /* ZOOM OUT BIAR MUAT DI LAYAR PENDEK */
+    transform: scale(0.75) !important;  
+    
+    margin-top: -10px !important;   /* Tarik ke atas dikit */
+    margin-bottom: -10px !important; /* Tarik ke bawah dikit */
+    flex-shrink: 1 !important;
+}
+
+/* 3. TOMBOL KEMBALI (Biar gak mepet bawah) */
+#karya .step {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important; /* Jarak dari lantai */
+    transform: scale(0.9) !important;
+    flex-shrink: 0 !important;
+}
+
+/* --- PASTIKAN GAMBAR TETAP PORTRAIT (TEGAK) --- */
+.work-card-wrapper { width: 240px !important; } 
+.work-card { background-color: transparent !important; box-shadow: none !important; }
+
+.work-card-image {
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important; /* Rasio Poster/Portrait */
+    height: auto !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+.work-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Responsive Laptop */
+@media (min-width: 768px) {
+    .work-card-wrapper { width: 260px !important; }
+    .work-card-image { height: auto !important; } 
+}
+
 </style>
 </head>
 <body>
