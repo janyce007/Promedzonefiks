@@ -316,7 +316,7 @@ button.step:hover {
 .arch-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .scroll-indicator { position: absolute; bottom: 30px; animation: bounce 2s infinite; opacity: 0.7; font-size: 24px; cursor: pointer; }
 @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-.dosen-grid-wrapper { padding: 80px 20px; width: 100%; background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); display: flex; flex-direction: column; align-items: center; }
+.dosen-grid-wrapper { padding: 20px 20px 80px; width: 100%; background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); display: flex; flex-direction: column; align-items: center; }
 .dosen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; max-width: 1200px; width: 100%; }
 .dosen-card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); transition: transform 0.3s; cursor: pointer; overflow: hidden; text-align: center; border: 1px solid #ddd; display: flex; flex-direction: column; height: 100%; scroll-margin-top: 100px; }
 .dosen-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
@@ -684,7 +684,7 @@ button.step:hover {
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="https://via.placeholder.com/180">
+                    <img src="background.jpg/Untitled design - 5.JPG">
                     <h3>Sovia</h3>
                     <p>Developer</p>
                 </div>
@@ -697,7 +697,7 @@ button.step:hover {
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="https://via.placeholder.com/180">
+                    <img src="background.jpg/Untitled design - 3.JPG">
                     <h3>Nabila</h3>
                     <p>Developer</p>
                 </div>
@@ -710,7 +710,7 @@ button.step:hover {
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="https://via.placeholder.com/180">
+                    <img src="background.jpg/Untitled design - 6.JPG">
                     <h3>Janyce</h3>
                     <p>Project Manager</p>
                 </div>
@@ -723,7 +723,7 @@ button.step:hover {
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="https://via.placeholder.com/180">
+                    <img src="background.jpg/Untitled design - 7.JPG">
                     <h3>Kirana</h3>
                     <p>Developer</p>
                 </div>
@@ -736,7 +736,7 @@ button.step:hover {
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="https://via.placeholder.com/180">
+                    <img src="background.jpg/Untitled design - 4.JPG">
                     <h3>Mayske</h3>
                     <p>Developer</p>
                 </div>
@@ -790,16 +790,16 @@ button.step:hover {
 
 <div id="dosen" class="page">
     <div class="dosen-arch-wrapper">
-        <h2>Meet cur Team</h2>
-        <p>A diverse group of passionate professionals, each bringing unique skills.</p>
+        <h2>Profil Dosen Promed</h2>
+        <p></p>
         <div class="arch-scene" id="dosen-arch-scene">
             </div>
         <div class="scroll-indicator" onclick="document.getElementById('dosenGrid').scrollIntoView({behavior:'smooth'})"><i class="fas fa-chevron-down"></i></div>
     </div>
 
     <div class="dosen-grid-wrapper">
-        <h2>Profil Dosen</h2>
-        <p>Dosen Produksi Media UI berpengalaman di industri kreatif dan digital.</p>
+        <h2></h2>
+        <p></p>
         <div class="dosen-grid" id="dosenGrid">
             </div>
         <button class="step" data-page="home" style="margin-top: 40px;">Kembali ke Home</button>
@@ -810,10 +810,10 @@ button.step:hover {
     <div class="facility-card">
         <h2>Fasilitas Produksi Media</h2>
            
-        <img src="https://via.placeholder.com/800x400?text=Fasilitas+Laboratorium" alt="Fasilitas Promed" style="width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <img src="fotoposter.jpg/ddb30fb2-7145-4847-ae0b-c36b96cf0340.JPG" alt="Fasilitas Promed" style="width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
            
         <p>
-            **POLAR LAB** (Laboratorium Produksi Media dan Teaching Factory) adalah laboratorium milik Program Studi Produksi Media yang berfungsi sebagai pusat penelitian dan produksi media, sekaligus sebagai *teaching factory* untuk mendukung pengembangan bakat, minat, dan pembelajaran mahasiswa di berbagai bidang, seperti *game development*, animasi, jurnalisme digital, dan produksi media lainnya.
+            POLAR LAB (Laboratorium Produksi Media dan Teaching Factory) adalah laboratorium milik Program Studi Produksi Media yang berfungsi sebagai pusat penelitian dan produksi media, sekaligus sebagai teaching factory untuk mendukung pengembangan bakat, minat, dan pembelajaran mahasiswa di berbagai bidang, seperti game development, animasi, jurnalisme digital, dan produksi media lainnya.
         </p>
     </div>
     <button class="step" data-page="home">Kembali</button>
@@ -1125,20 +1125,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // DATA DOSEN
 const dosenData = [
-    { name: "Ngurah Rangga Wisesa, .", position: "Kepala Program Studi Produksi Media", ig: "ranggawisesa", igLink: "https://www.instagram.com/ranggawisesa", linkedin: "dr-rangga-w-2906189b", linkedinLink: "https://www.linkedin.com/in/dr-rangga-w-2906189b" },
-    { name: "Dr. Achmad Istamar", position: "Country Head-Indonesia at Google Customer Solutions", ig: "achmadistamar", igLink: "https://www.instagram.com/achmadistamar", linkedin: "istamar", linkedinLink: "https://www.linkedin.com/in/istamar" },
-    { name: "Sheila Timothy", position: "Produser Film", ig: "lalatimothy", igLink: "https://www.instagram.com/lalatimothy", linkedin: "sheila-timothy", linkedinLink: "https://www.linkedin.com/in/sheila-timothy" },
-    { name: "Dian Paramita Sastrowardoyo, M.M.", position: "Aktris, Produser, Sutradara Film", ig: "therealdisastr", igLink: "https://www.instagram.com/therealdisastr", linkedin: null, linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo" }, 
-    { name: "Alif Keenan Ibrahim, M.A.", position: "Content Strategy & Analytics at Vidio", ig: "alif.keenan", igLink: "https://www.instagram.com/alif.keenan", linkedin: "alif-ibrahim", linkedinLink: "https://www.linkedin.com/in/alif-ibrahim" },
-    { name: "Hendrika Gaudens Refwalu, M.M.", position: "Marketing Lead Microsoft Indonesia", ig: "densi_refwalu", igLink: "https://www.instagram.com/densi_refwalu", linkedin: "densirefwalu", linkedinLink: "https://www.linkedin.com/in/densirefwalu" },
-    { name: "Wafa Taftazani, MBA", position: "UpBanx, VCGamers, RANSVERSE", ig: "wafataftazani", igLink: "https://www.instagram.com/wafataftazani", linkedin: "wafataftazani", linkedinLink: "https://www.linkedin.com/in/wafataftazani" },
-    { name: "Svida S.P. Alisjahbana, MBA", position: "GCM MEDIA GROUP", ig: "svidss", igLink: "https://www.instagram.com/svidss", linkedin: "svidaalisjahbana", linkedinLink: "https://www.linkedin.com/in/svidaalisjahbana" },
-    { name: "Gabriel Chemin, MBA", position: "General Project Manager Spotify", ig: "gabechemin", igLink: "https://www.instagram.com/gabechemin", linkedin: "gabrielchemin", linkedinLink: "https://www.linkedin.com/in/gabrielchemin" },
-    { name: "Dr. Eunice Sari", position: "CX INSIGHT", ig: "eunicesari", igLink: "https://www.instagram.com/eunicesari", linkedin: "dr-eunice-sari", linkedinLink: "https://www.linkedin.com/in/dr-eunice-sari" },
-    { name: "Arief Suditomo, MA", position: "News Director & Editor in Chief Metro TV", ig: "ariefsuditomo", igLink: "https://www.instagram.com/ariefsuditomo", linkedin: "ariefsuditomo", linkedinLink: "https://www.linkedin.com/in/ariefsuditomo" },
-    { name: "Nadif Zahirudin", position: "Kuy! Entertainment", ig: null, igLink: null, linkedin: "nzahiruddin", linkedinLink: "https://www.linkedin.com/in/nzahiruddin" },
-    { name: "Dr. Soraya Haque", position: "Model", ig: "sorayahaque", igLink: "https://www.instagram.com/sorayahaque", linkedin: null, linkedinLink: null },
-    { name: "Lukman Sardi", position: "Sutradara & Produser", ig: "lukmansrd", igLink: "https://www.instagram.com/lukmansrd", linkedin: "lukman-sardi", linkedinLink: "https://www.linkedin.com/in/lukman-sardi" }
+    { name: "Ngurah Rangga Wisesa, .", image:"fotodosen.jpg/Untitled design.zip - 1.JPG", position: "Kepala Program Studi Produksi Media", ig: "ranggawisesa", igLink: "https://www.instagram.com/ranggawisesa", linkedin: "dr-rangga-w-2906189b", linkedinLink: "https://www.linkedin.com/in/dr-rangga-w-2906189b" },
+    { name: "Dr. Achmad Istamar", image:"fotodosen.jpg/Untitled design.zip - 2.JPG", position: "Country Head-Indonesia at Google Customer Solutions", ig: "achmadistamar", igLink: "https://www.instagram.com/achmadistamar", linkedin: "istamar", linkedinLink: "https://www.linkedin.com/in/istamar" },
+    { name: "Sheila Timothy", image:"fotodosen.jpg/Untitled design.zip - 3.JPG", position: "Produser Film", ig: "lalatimothy", igLink: "https://www.instagram.com/lalatimothy", linkedin: "sheila-timothy", linkedinLink: "https://www.linkedin.com/in/sheila-timothy" },
+    { name: "Dian Paramita Sastrowardoyo, M.M.", image:"fotodosen.jpg/Untitled design.zip - 4.JPG", position: "Aktris, Produser, Sutradara Film", ig: "therealdisastr", igLink: "https://www.instagram.com/therealdisastr", linkedin: null, linkedinLink: "https://www.linkedin.com/in/dian-paramita-sastrowardoyo" }, 
+    { name: "Alif Keenan Ibrahim, M.A.", image:"fotodosen.jpg/Untitled design.zip - 5.JPG", position: "Content Strategy & Analytics at Vidio", ig: "alif.keenan", igLink: "https://www.instagram.com/alif.keenan", linkedin: "alif-ibrahim", linkedinLink: "https://www.linkedin.com/in/alif-ibrahim" },
+    { name: "Hendrika Gaudens Refwalu, M.M.", image:"fotodosen.jpg/Untitled design.zip - 6.JPG", position: "Marketing Lead Microsoft Indonesia", ig: "densi_refwalu", igLink: "https://www.instagram.com/densi_refwalu", linkedin: "densirefwalu", linkedinLink: "https://www.linkedin.com/in/densirefwalu" },
+    { name: "Wafa Taftazani, MBA", image:"fotodosen.jpg/Untitled design.zip - 7.JPG", position: "UpBanx, VCGamers, RANSVERSE", ig: "wafataftazani", igLink: "https://www.instagram.com/wafataftazani", linkedin: "wafataftazani", linkedinLink: "https://www.linkedin.com/in/wafataftazani" },
+    { name: "Svida S.P. Alisjahbana, MBA", image:"fotodosen.jpg/Untitled design.zip - 9.JPG", position: "GCM MEDIA GROUP", ig: "svidss", igLink: "https://www.instagram.com/svidss", linkedin: "svidaalisjahbana", linkedinLink: "https://www.linkedin.com/in/svidaalisjahbana" },
+    { name: "Gabriel Chemin, MBA", image:"fotodosen.jpg/Untitled design.zip - 8.JPG", position: "General Project Manager Spotify",  igLink: "https://www.instagram.com/gabechemin", linkedin: "gabriel-chemin", linkedinLink: "https://www.linkedin.com/in/gabriel-chemin" }, 
+    { name: "Dr. Eunice Sari", image:"fotodosen.jpg/Untitled design.zip - 10.JPG", ig: "eunicesari",  position: "CX INSIGHT", igLink: "https://www.instagram.com/eunicesari", linkedin: "dr-eunice-sari", linkedinLink: "https://www.linkedin.com/in/dr-eunice-sari" },
+    { name: "Arief Suditomo, MA", image:"fotodosen.jpg/Untitled design.zip - 11.JPG", position: "News Director & Editor in Chief Metro TV", ig: "ariefsuditomo", igLink: "https://www.instagram.com/ariefsuditomo", linkedin: "ariefsuditomo", linkedinLink: "https://www.linkedin.com/in/ariefsuditomo" },
+    { name: "Nadif Zahirudin", image:"fotodosen.jpg/Untitled design.zip - 12.JPG", position: "Kuy! Entertainment", ig: null, igLink: null, linkedin: "nzahiruddin", linkedinLink: "https://www.linkedin.com/in/nzahiruddin" },
+    { name: "Dr. Soraya Haque", image:"fotodosen.jpg/Untitled design.zip - 13.JPG", position: "Model", ig: "sorayahaque", igLink: "https://www.instagram.com/sorayahaque", linkedin: null, linkedinLink: null },
+    { name: "Lukman Sardi", image:"fotodosen.jpg/Untitled design.zip - 14.JPG", position: "Sutradara & Produser", ig: "lukmansrd", igLink: "https://www.instagram.com/lukmansrd", linkedin: "lukman-sardi", linkedinLink: "https://www.linkedin.com/in/lukman-sardi" }
 ];
 
 const dosenGridContainer = document.getElementById('dosenGrid');
