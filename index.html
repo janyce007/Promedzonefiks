@@ -68,53 +68,17 @@ body{
 /* HOME PAGE STYLING */
 #home.page { padding-top: 0; }
 
-/* LANDING SECTION (UPDATED) */
+/* LANDING SECTION */
 .landing-section {
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* UBAH BACKGROUND: Menggunakan gradasi yang sama dengan About Us */
-    background: image:"background.jpg/Background halaman 1.png" no-repeat center center;
+    background: url('bg.jpg') no-repeat center center;
+    background-size: cover;
     position: relative;
-    overflow: hidden; /* Mencegah scrollbar jika gambar samping terlalu besar */
-}
-/* HAPUS OVERLAY SEBELUMNYA (.landing-section::before) KARENA TIDAK DIPERLUKAN LAGI */
-
-/* GAYA UNTUK GAMBAR SAMPING BARU */
-.side-decoration {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); /* Posisikan tepat di tengah vertikal */
-    max-height: 70vh; /* Batasi tinggi agar tidak terlalu mendominasi */
-    width: auto;
-    max-width: 350px; /* Batasi lebar */
-    z-index: 5; /* Di bawah kotak tengah (z-index 10) tapi di atas background */
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    opacity: 0.9;
-    object-fit: cover;
-}
-.side-decoration.left {
-    left: 5%; /* Jarak dari kiri */
-    transform: translateY(-50%) rotate(-5deg); /* Sedikit miring untuk estetika */
-}
-.side-decoration.right {
-    right: 5%; /* Jarak dari kanan */
-    transform: translateY(-50%) rotate(5deg); /* Sedikit miring ke arah berlawanan */
-}
-
-/* Responsif untuk gambar samping: Sembunyikan di layar kecil agar tidak menutupi teks */
-@media (max-width: 1100px) {
-    .side-decoration {
-        max-width: 200px;
-    }
-}
-@media (max-width: 900px) {
-    .side-decoration {
-        display: none;
-    }
+    overflow: hidden;
 }
 
 .landing-content {
@@ -124,30 +88,19 @@ body{
     color: white;
     max-width: 600px;
     padding: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    border: none;
     border-radius: 40px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    backdrop-filter: none;
+    box-shadow: none;
     animation: fadeIn 1.2s ease-out;
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.landing-content h1 {
-    font-family: "Bricolage Grotesque";
-    font-size: 64px;
-    margin-bottom: 10px;
-    line-height: 1;
-    text-shadow: 0 0 20px rgba(22, 82, 255, 0.6);
-}
-.landing-content p {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 40px;
-}
+/* TOMBOL JELAJAHI SEKARANG (UPDATED: WHITE GLOW) */
 .explore-btn {
-    background: var(--accent);
-    color: white;
+    background: var(--accent-2); /* KUNING */
+    color: white;                /* PUTIH */
     border: none;
     padding: 18px 40px;
     border-radius: 50px;
@@ -157,18 +110,20 @@ body{
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 0 20px rgba(22, 82, 255, 0.6), 0 0 0 4px rgba(22, 82, 255, 0.2);
+    /* UPDATE: Shadow jadi PUTIH */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
 }
 .explore-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(22, 82, 255, 0.9), 0 0 0 6px rgba(22, 82, 255, 0.4);
-    background: #306aff;
+    /* UPDATE: Hover Shadow jadi PUTIH lebih terang */
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 0 6px rgba(255, 255, 255, 0.4);
+    background: #ffc107; /* Kuning sedikit gelap saat hover */
 }
 .explore-btn i { transition: transform 0.3s; }
 .explore-btn:hover i { transform: translateX(5px); }
 
-/* ROADMAP SECTION (CLASSIC SVG STYLE) */
+/* ROADMAP SECTION */
 .roadmap-section {
     min-height: 100vh;
     display: flex;
@@ -216,7 +171,6 @@ body{
     transform: scale(1.1); 
 }
 
-/* 1. TAMPILAN UNTUK ROADMAP (DIV) - TETAP KECIL/KOTAK */
 div.step { 
   background: var(--accent); 
   color: white; 
@@ -232,7 +186,6 @@ div.step {
 div.step.active { background: var(--accent); box-shadow: 0 8px 15px rgba(22,82,255,0.4); transform: scale(1.05); }
 div.step:hover:not(.active) { transform: scale(1.03); box-shadow: 0 6px 12px rgba(22,82,255,0.3); }
 
-/* 2. TAMPILAN UNTUK TOMBOL (BUTTON) */
 button.step {
     background: var(--accent);
     color: white;
@@ -255,7 +208,7 @@ button.step:hover {
     background: #306aff;
 }
 
-/* --- CALENDAR, ABOUT, ETC (SAME AS BEFORE) --- */
+/* --- CALENDAR, ABOUT, ETC --- */
 #calendar {
     background-color: var(--neu-bg);
     display: flex;
@@ -273,7 +226,7 @@ button.step:hover {
     background: var(--neu-bg);
     border-radius: 30px;
     box-shadow: 20px 20px 60px var(--neu-shadow-dark), 
-               -20px -20px 60px var(--neu-shadow-light);
+                -20px -20px 60px var(--neu-shadow-light);
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -341,7 +294,20 @@ button.step:hover {
 
 /* Dosen */
 #dosen { padding: 0; }
-.dosen-arch-wrapper { width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0b0d14; color: white; padding: 40px 20px; position: relative; overflow: hidden; }
+.dosen-arch-wrapper { 
+    width: 100%; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    /* UPDATED BACKGROUND TO BLUE GRADIENT (SAME AS ABOUT US) */
+    background: linear-gradient(135deg, var(--bg-about) 0%, #2a4cb8 40%, #3b6aff 100%); 
+    color: white; 
+    padding: 40px 20px; 
+    position: relative; 
+    overflow: hidden; 
+}
 .dosen-arch-wrapper h2 { font-family: "Bricolage Grotesque"; font-size: 48px; margin-bottom: 10px; z-index: 10; text-align: center; }
 .dosen-arch-wrapper p { color: rgba(255,255,255,0.6); margin-bottom: 20px; z-index: 10; font-size: 16px; text-align: center; max-width: 600px; }
 .arch-scene { width: 100%; height: 500px; position: relative; display: flex; justify-content: center; align-items: center; margin-top: 20px; }
@@ -389,7 +355,7 @@ button.step:hover {
 #testimoni p.sub { color:rgba(255,255,255,0.8); margin-bottom:60px; font-size:16px; }
 .slider-3d-testimoni { display:flex; justify-content:center; align-items:center; perspective:1000px; position:relative; height:400px; overflow:hidden; }
 .card-testi { position:absolute; width:320px; height:260px; background:rgba(255,255,255,0.1); border-radius:20px; border:1px solid rgba(255,255,255,0.2); backdrop-filter:blur(10px); box-shadow:0 10px 30px rgba(0,0,0,0.25); text-align:center; color:white; transform-style:preserve-3d; transition:transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease; opacity:0.6; padding:20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.card-testi img { width:80px;height:80px; border-radius:50%; object-fit:cover; border:3px solid rgba(255,255,255,0.6); margin-bottom:15px; }
+/* REMOVED IMG STYLES AS IMG IS GONE */
 .card-testi h3 {font-size:18px;margin-bottom:8px;}
 .card-testi p { font-size:14px; color:rgba(255,255,255,0.85); font-style:italic; line-height:1.4; }
 
@@ -513,6 +479,52 @@ button.step:hover {
   .roadmap-svg { width: 1000px; } /* Force width to keep shape, user might need to scroll or scale */
 }
 
+/* === CSS UNTUK ICON RAHASIA & MODAL RAHASIA === */
+.about-icon-trigger {
+    position: absolute;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.1); /* Transparan awal */
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+    z-index: 50;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.about-icon-trigger i {
+    color: rgba(255,255,255,0.7);
+    font-size: 24px;
+}
+.about-icon-trigger:hover { 
+    transform: scale(1.1); 
+    background: rgba(255,255,255,0.3); 
+}
+.about-icon-trigger.left { left: 30px; }
+.about-icon-trigger.right { right: 30px; }
+
+/* Status aktif (ketika diklik) */
+.about-icon-trigger.clicked { 
+    background: var(--accent-2); 
+    box-shadow: 0 0 20px rgba(255, 210, 77, 0.6);
+    border-color: var(--accent-2);
+}
+.about-icon-trigger.clicked i {
+    color: var(--text-dark);
+}
+
+/* Modal khusus Easter Egg */
+#easterEggModal .modal-box {
+    background: white;
+    max-width: 500px;
+    border-top: 5px solid var(--accent);
+}
+#easterEggModal p {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
@@ -526,11 +538,23 @@ button.step:hover {
     </div>
 </div>
 
+<div id="easterEggModal" class="modal-overlay">
+    <div class="modal-box">
+        <h2>Behind PromedZone</h2>
+        <p>
+            Website ini dibuat dengan tujuan untuk menjadi pusat informasi interaktif bagi mahasiswa, dosen, dan publik mengenai Program Studi Produksi Media. 
+            Kami ingin menampilkan karya, profil, dan semangat inovasi yang ada di dalam program studi ini melalui pengalaman digital yang menarik.
+        </p>
+        <p style="font-style: italic; font-size: 14px; color: var(--muted);">Terima kasih telah menemukan pesan tersembunyi ini!</p>
+        <button class="modal-btn btn-primary" onclick="closeEasterEgg()">Tutup</button>
+    </div>
+</div>
+
 <div id="spinWheelOverlay" class="spin-ui">
     <div class="close-spin" onclick="closeSpinUI()"><i class="fas fa-times"></i></div>
-      
+       
     <h2>Spin The Music!</h2>
-      
+       
     <div class="retro-metal-frame">
         
         <div class="screen-container screen-left" id="spinScreenLeft">
@@ -563,20 +587,15 @@ button.step:hover {
 </div>
 
 <div id="home" class="page active">
-      
+       
   <div class="landing-section">
-      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop" class="side-decoration left" alt="Tim Produksi">
-      
+       
       <div class="landing-content">
-          <div class="logo-mark" style="width: 60px; height: 60px; margin: 0 auto 20px; font-size: 24px;">PZ</div>
-          <h1>PromedZone</h1>
-          <p>Media Production & Creative Information Center</p>
           <button class="explore-btn" onclick="scrollToRoadmap()">
               Jelajahi Sekarang <i class="fas fa-arrow-right"></i>
           </button>
       </div>
 
-      <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?q=80&w=1470&auto=format&fit=crop" class="side-decoration right" alt="Peralatan Audio Video">
   </div>
 
   <div id="roadmap-section" class="roadmap-section">
@@ -591,7 +610,7 @@ button.step:hover {
                          S 450 250, 500 150 
                          C 550 50, 650 50, 700 150
                          S 850 250, 900 150" />
-            
+             
                 <path class="roadmap-dashed-outline" 
                       d="M 100 150 
                          C 150 50, 250 50, 300 150 
@@ -630,14 +649,14 @@ button.step:hover {
   </div>
 
   <div id="testimoni">
-    <h2>Testimoni Mahasiswa & Alumni</h2>
+    <h2>Testimoni Mahasiswa</h2>
     <p class="sub">Pendapat mereka tentang pengalaman belajar di Produksi Media.</p>
     <div class="slider-3d-testimoni" id="sliderTesti">
-      <div class="card-testi active"><img src="https://via.placeholder.com/80" alt="Arka"><h3>Arka Pratama</h3><p>"Promed ngajarin aku gimana bikin konten kreatif yang relevan dengan industri masa kini."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/80" alt="Salsabila"><h3>Salsabila N.</h3><p>"Dosen-dosennya inspiratif banget! Kita diajarin langsung sama praktisi dunia media."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/80" alt="Rian"><h3>Rian Saputra</h3><p>"Lingkungan belajarnya seru, banyak kolaborasi dan project nyata."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/80" alt="Ayu"><h3>Ayu Wulandari</h3><p>"Setiap semester selalu ada karya yang bisa dibanggakan buat portofolio."</p></div>
-      <div class="card-testi"><img src="https://via.placeholder.com/80" alt="Kevin"><h3>Kevin H.</h3><p>"Kuliah di Promed bener-bener bantu aku siap kerja di industri kreatif."</p></div>
+      <div class="card-testi active"><h3>Alvin, Promed 24</h3><p>"Di jurusan ini cocok untuk orang yang mau explore banyak hal dan "nyemplung" ke industri kreatif"."</p></div>
+      <div class="card-testi"><h3>Rafa Rifdah, Promed 24</h3><p>"Very seru, challenging, hectic but worthit kokkkk!!!."</p></div>
+      <div class="card-testi"><h3>Rara, Promed 24</h3><p>"kesan aku buat promed kurang lebih selama 3 semester ini seru siihh bener bener diajarin banyak hal dan nambah pengalaman karena kita diajarin segala macemnyaa disini."</p></div>
+      <div class="card-testi"><h3>Irfan, Promed 24</h3><p>"kayak kinderjoy aja, banyak kejutannya."</p></div>
+      <div class="card-testi"><h3>Belva Navashabila, Promed 23</h3><p>"Menjadi bagian dari promed itu salah satu fase terbaik di hidup aku. Dimulai dari berkesempataan kuliah di Rusia, pengalaman itu sangat challenging dan new experience banget."</p></div>
     </div>
   </div>
 
@@ -656,6 +675,11 @@ button.step:hover {
   <div id="about">
     <h2>About Us</h2>
     <p>Tim di balik PromedZone terdiri dari individu kreatif yang berfokus pada pengembangan media dan teknologi digital.</p>
+    
+    <div class="about-icon-trigger right" id="iconRight" onclick="openAboutModal()">
+         <i class="fas fa-question"></i>
+    </div>
+
     <div class="slider-3d" id="aboutCards">
         <div class="card">
             <div class="card-inner">
@@ -785,11 +809,9 @@ button.step:hover {
 <div id="fasilitas" class="page">
     <div class="facility-card">
         <h2>Fasilitas Produksi Media</h2>
-          
-        <div class="facility-image-placeholder">
-            [Area untuk Foto 360°]
-        </div>
-          
+           
+        <img src="https://via.placeholder.com/800x400?text=Fasilitas+Laboratorium" alt="Fasilitas Promed" style="width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+           
         <p>
             **POLAR LAB** (Laboratorium Produksi Media dan Teaching Factory) adalah laboratorium milik Program Studi Produksi Media yang berfungsi sebagai pusat penelitian dan produksi media, sekaligus sebagai *teaching factory* untuk mendukung pengembangan bakat, minat, dan pembelajaran mahasiswa di berbagai bidang, seperti *game development*, animasi, jurnalisme digital, dan produksi media lainnya.
         </p>
@@ -798,7 +820,7 @@ button.step:hover {
 </div>
 
 <div id="calendar" class="page">
-      
+       
     <div class="neu-calendar-container">
         
         <div class="side-panel-trigger" onclick="toggleSidePanel()">
@@ -840,13 +862,13 @@ button.step:hover {
 <div id="event-detail" class="page">
     <div class="detail-card">
         <h2 id="detailTitle">Judul Acara</h2>
-          
+           
         <div class="detail-info">
             <p><strong>Tanggal</strong>: <span id="detailDate"></span></p>
             <p><strong>Tempat</strong>: <span id="detailPlace"></span></p>
             <p><strong>Penyelenggara</strong>: <span id="detailOrganizer"></span></p>
         </div>
-          
+           
         <div class="detail-description">
             <p id="detailDescription"></p>
             <p>Info lebih lanjut: <a href="#" id="detailIgLink" target="_blank"><i class="fab fa-instagram"></i> <span id="detailIgName"></span></a></p>
@@ -858,7 +880,7 @@ button.step:hover {
 <div id="karya" class="page">
     <h2>Galeri Karya</h2>
     <p>Film pendek, animasi, dan game edukatif karya mahasiswa.</p>
-      
+       
     <div class="work-filter-tabs">
         <div class="tab-button active" data-filter="all" id="allTab"><i class="fas fa-layer-group"></i> Semua</div>
         <div class="tab-button" data-filter="game" id="gameTab"><i class="fas fa-gamepad"></i> Game</div>
@@ -873,22 +895,22 @@ button.step:hover {
 
         <button class="nav-arrow right" id="scrollRight"><i class="fas fa-chevron-right"></i></button>
     </div>
-      
+       
     <button class="step" data-page="home">Kembali ke Home</button>
 </div>
 
 <div id="work-detail" class="page">
     <div class="detail-card">
         <h2 id="workDetailTitle">Judul Karya</h2>
-          
+           
         <div id="workMediaContainer" class="media-container">
             </div>
-          
+           
         <div class="detail-info">
             <p><strong>Kategori</strong>: <span id="workDetailCategory"></span></p>
             <p><strong>Status</strong>: <span id="workDetailStatus"></span></p>
         </div>
-          
+           
         <div class="detail-description">
             <p id="workDetailDescription"></p>
         </div>
@@ -920,7 +942,7 @@ function returnToRoadmap() {
 function navigateToPage(targetPage, itemId = null) {
     // Hide all pages
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-      
+       
     // Stop media playback saat pindah halaman
     stopMediaPlayback();
 
@@ -935,7 +957,7 @@ function navigateToPage(targetPage, itemId = null) {
     } else if (targetPage === 'work-detail' && itemId) {
         showWorkDetail(itemId);
     }
-      
+       
     if (targetPage === 'promed-peminatan-detail') {
         renderPeminatanListDetail();
     }
@@ -947,7 +969,7 @@ function navigateToPage(targetPage, itemId = null) {
     const roadmapContainer = document.getElementById('heroRoadmap');
     if (roadmapContainer) {
         document.querySelectorAll('#heroRoadmap .step').forEach(b => b.classList.remove("active"));
-          
+           
         const promedNavPages = ['promed-nav', 'promed-about-detail', 'promed-peminatan-detail', 'peminatan-single-detail-temp'];
         const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
 
@@ -987,7 +1009,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigateToPage(this.dataset.page);
         });
     });
-      
+       
     // INITIALIZE HOME ACTIVE STATE
     const promedNavButton = document.querySelector('.road-step-wrapper .step[data-page="promed-nav"]');
     if (promedNavButton) {
@@ -1034,7 +1056,7 @@ function renderPeminatanListDetail() {
     const container = document.getElementById('peminatanList');
     if (!container) return;
     container.innerHTML = '';
-      
+       
     peminatanData.forEach((peminatan) => {
         const itemBox = document.createElement('div');
         itemBox.classList.add('peminatan-item-box');
@@ -1066,7 +1088,7 @@ function showPeminatanDetail(peminatanId) {
 
     const igLinkElement = peminatan.igLink 
         ? `<div class="work-detail-footer">
-               <a href="${peminatan.igLink}" target="_blank"><i class="fab fa-instagram"></i> Instagram ${peminatan.ig}</a>
+                <a href="${peminatan.igLink}" target="_blank"><i class="fab fa-instagram"></i> Instagram ${peminatan.ig}</a>
            </div>` 
         : '';
         
@@ -1273,7 +1295,7 @@ const worksData = [
     { id: 'cp_wherever', title: 'Wherever The Wind Take Us', category: 'Charmless Pals - Musik', type: 'music', status: 'Aktif', description: 'Lagu Wherever The Wind Take Us oleh Charmless Pals.', mediaType: 'music', youtubeId: 'PbQ9KoLncWc', youtubeLink: 'https://youtu.be/PbQ9KoLncWc', igLink: 'https://www.instagram.com/charmlesspals/' },
 
     // -- KARYA LAINNYA (GAME/FILM) TETAP ADA --
-    { id: 'fate', title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film' },
+    { id: 'fate', title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film', imageSrc: 'c31225f1-6d8d-4d35-8828-3aa94868d45b.JPG' },
     { id: 'baduy', title: 'Baduy', category: 'Film Dokumenter', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film dokumenter karya mahasiswa Produksi Media UI.', mediaType: 'film' },
     { id: 'Drawn To You', title: 'Drawn To You', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', igLink: null },
     { id: 'Kita Perbaiki', title: 'Kita Perbaiki', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', mediaType: 'film', igLink: null },
@@ -1300,14 +1322,14 @@ function renderWorksList(filter = 'all') {
 
     worksList.innerHTML = '';
     const filteredData = worksData.filter(work => filter === 'all' || work.type === filter);
-      
+       
     if (filteredData.length === 0) {
         worksList.innerHTML = '<p style="color:var(--muted); text-align:center; width:100%;">Tidak ada karya dalam kategori ini.</p>';
         scrollLeftBtn.style.display = 'none';
         scrollRightBtn.style.display = 'none';
         return;
     }
-      
+       
     scrollLeftBtn.style.display = 'block';
     scrollRightBtn.style.display = 'block';
 
@@ -1320,10 +1342,23 @@ function renderWorksList(filter = 'all') {
         const shortDesc = work.description.substring(0, 70) + (work.description.length > 70 ? '...' : '');
         const categoryDisplay = work.category.split(' - ')[0];
 
+        // --- PERBAIKAN DISINI ---
         let thumbUrl = '';
-        if(work.youtubeId) thumbUrl = `https://img.youtube.com/vi/${work.youtubeId}/mqdefault.jpg`;
+        
+        // 1. Cek apakah ada file gambar manual (seperti fate.jpg)
+        if (work.imageSrc) {
+            thumbUrl = work.imageSrc;
+        } 
+        // 2. Jika tidak ada, cek apakah ada YouTube ID
+        else if (work.youtubeId) {
+            thumbUrl = `https://img.youtube.com/vi/${work.youtubeId}/mqdefault.jpg`;
+        }
 
-        const coverContent = thumbUrl ? `<img src="${thumbUrl}" style="width:100%; height:100%; object-fit:cover;">` : `Cover ${work.title}`;
+        // Jika ada thumbUrl (baik dari file atau YouTube), jadikan gambar. Jika tidak, jadi teks.
+        const coverContent = thumbUrl 
+            ? `<img src="${thumbUrl}" style="width:100%; height:100%; object-fit:cover;" alt="${work.title}">` 
+            : `Cover ${work.title}`;
+        // ------------------------
 
         wrapper.innerHTML = `
             <div class="work-card">
@@ -1482,14 +1517,25 @@ function showWorkDetail(workId) {
     const footerContainer = document.getElementById('workDetailFooter');
     footerContainer.innerHTML = '';
 
-    if (work.mediaType === 'music' && work.youtubeId) {
+    // LOGIKA BARU: Tampilkan Gambar Thumbnail jika ada YouTube ID
+    let imgUrl = '';
+    if (work.youtubeId) {
+        // Gunakan thumbnail kualitas tinggi
+        imgUrl = `https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg`;
+    } else if (work.imageSrc) {
+        // Fallback jika ada gambar manual (opsional)
+        imgUrl = work.imageSrc;
+    }
+
+    if (imgUrl) {
         mediaContainer.style.display = 'block';
-        const embedUrl = `https://www.youtube.com/embed/${work.youtubeId}?autoplay=1&rel=0`;
-        mediaContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-    } else if (work.youtubeId) {
-        mediaContainer.style.display = 'block';
-        const embedUrl = `https://www.youtube.com/embed/${work.youtubeId}?rel=0`;
-        mediaContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        // Reset style agar gambar tampil proporsional (bukan rasio video)
+        mediaContainer.style.paddingBottom = '0'; 
+        mediaContainer.style.height = 'auto';
+        mediaContainer.style.background = 'transparent';
+        
+        // Tampilkan Gambar
+        mediaContainer.innerHTML = `<img src="${imgUrl}" alt="${work.title}" style="width:100%; height:auto; border-radius:10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">`;
     } else {
         mediaContainer.style.display = 'none';
         mediaContainer.innerHTML = '';
@@ -1694,6 +1740,46 @@ document.getElementById('neuNextMonth').addEventListener('click', () => {
 
 // Init
 renderNeuCalendar(currentMonthIndex);
+
+// --- LOGIKA EASTER EGG (DUA ICON KIRI & KANAN) ---
+let leftIconClicked = false;
+let rightIconClicked = false;
+
+function handleIconClick(side) {
+    if (side === 'left') {
+        leftIconClicked = true;
+        document.getElementById('iconLeft').classList.add('clicked');
+    } else {
+        rightIconClicked = true;
+        document.getElementById('iconRight').classList.add('clicked');
+    }
+
+    checkEasterEgg();
+}
+
+function checkEasterEgg() {
+    // Jika KEDUANYA sudah diklik
+    if (leftIconClicked && rightIconClicked) {
+        setTimeout(() => {
+             document.getElementById('easterEggModal').style.display = 'flex';
+        }, 300); // Delay dikit biar kelihatan efek kliknya
+    }
+}
+
+function closeEasterEgg() {
+    document.getElementById('easterEggModal').style.display = 'none';
+    
+    // Reset status agar bisa dimainkan lagi
+    leftIconClicked = false;
+    rightIconClicked = false;
+    document.getElementById('iconLeft').classList.remove('clicked');
+    document.getElementById('iconRight').classList.remove('clicked');
+}
+
+// FUNGSI BARU UNTUK MEMBUKA MODAL ABOUT SECARA LANGSUNG
+function openAboutModal() {
+    document.getElementById('easterEggModal').style.display = 'flex';
+}
 
 </script>
 </body>  
