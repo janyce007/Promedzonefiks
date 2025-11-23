@@ -957,71 +957,145 @@ button.step:hover {
     margin-top: 40px !important;
 }
 #karya {
-    position: fixed !important;
+    position: fixed !important;     /* Kunci posisi */
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 100vh !important;       /* Pas 1 layar */
+    height: 100vh !important;       /* Pas 1 Layar */
     overflow: hidden !important;    /* Gak bisa scroll */
+    padding: 0 !important;          /* Reset jarak */
     z-index: 100 !important;
-    padding: 0 !important;
     
-    /* Susun rapi ke tengah */
+    /* Tengahin Konten */
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
+    
+    /* Background Gradasi */
     background: linear-gradient(180deg,var(--bg-1),var(--bg-2)) !important;
 }
 
-/* 1. Kecilin Judul & Rapatkan Jaraknya */
+/* Atur Judul Biar Pas di Atas */
 #karya h2 {
-    font-size: 32px !important;
-    margin-top: 50px !important;    /* Turunin dikit biar judul keliatan */
-    margin-bottom: 5px !important;  /* Rapatkan ke bawah */
+    font-family: "Bricolage Grotesque", sans-serif !important;
+    font-size: 48px !important;     /* Ukuran Judul */
+    margin-top: 40px !important;    /* Jarak dari atap */
+    margin-bottom: 5px !important;
+    color: var(--text-dark) !important;
 }
+
 #karya p {
-    font-size: 14px !important;
-    margin-bottom: 15px !important; /* Jarak ke tombol filter */
+    font-size: 16px !important;
+    color: var(--muted) !important;
+    margin-bottom: 15px !important;
 }
 
-/* 2. Rapatkan Tombol Filter */
+/* Tombol Filter */
 .work-filter-tabs {
-    margin-bottom: 20px !important;
+    margin-bottom: 10px !important;
+    display: flex !important;
+    gap: 10px !important;
 }
 
-/* 3. Trik Skala: Kecilin Area Kartu Dikit Biar Muat */
+/* Area Galeri (Kartu-kartu) */
 .gallery-container {
     width: 100% !important;
     max-width: 1200px !important;
-    /* Zoom out dikit (90%) biar gak desak-desakan */
-    transform: scale(0.9) !important; 
-    transform-origin: center center !important;
-    margin: 0 !important;
+    flex: 1 !important;             /* Isi sisa ruang kosong */
+    display: flex !important;
+    align-items: center !important; /* Tengah Vertikal */
+    justify-content: center !important;
+    
+    /* Zoom Out dikit biar muat di layar laptop kecil */
+    transform: scale(0.85) !important; 
+    margin-top: -20px !important;   /* Tarik ke atas dikit */
 }
 
-/* 4. Tombol Kembali */
+/* Tombol Kembali */
 #karya .step {
-    margin-top: 10px !important;
+    margin-bottom: 40px !important; /* Jarak dari lantai */
     transform: scale(0.9) !important;
 }
-#karya {
-    padding-bottom: 80px !important; /* Memberi ruang kosong di bawah */
+
+/* --- STYLE GAMBAR --- */
+/* Wrapper Kartu */
+.work-card-wrapper {
+    flex: 0 0 auto !important;
+    width: 240px !important;        /* Lebar Kartu */
+    margin: 0 15px !important;      /* Jarak antar kartu */
+    cursor: pointer !important;
+    transition: transform 0.3s ease !important;
+}
+.work-card-wrapper:hover {
+    transform: translateY(-10px) !important;
+}
+
+/* Kartu Transparan */
+.work-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* Gambar (Portrait 2:3) */
+.work-card-image {
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important; /* Rasio Poster */
+    height: auto !important;
+    background: #ddd !important;    /* Placeholder abu */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+.work-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Caption Judul Lagu/Film */
+.work-card-caption {
+    padding: 10px 5px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+}
+
+/* Tombol Panah Kanan Kiri */
+.nav-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+    background: rgba(22, 82, 255, 0.8) !important;
+    color: white !important;
+    border: none !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
 }
+.nav-arrow.left { left: 20px !important; }
+.nav-arrow.right { right: 20px !important; }
 
-/* 2. Khusus Tombol Kembali di Galeri Karya */
-#karya .step {
-    margin-top: 10px !important;     /* Jarak dari gambar diperkecil */
-    margin-bottom: 20px !important;  /* Jarak dari bibir bawah layar */
-    transform: scale(0.9) translateY(-20px) !important; /* Trik paksa naik 20px */
+/* List Kartu (Scroll Horizontal) */
+.works-list {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    padding: 20px 0 !important;
+    gap: 0 !important; /* Gap dihandle margin wrapper */
+    scrollbar-width: none !important; /* Sembunyikan scrollbar */
 }
-
-/* 3. Kecilin dikit lagi area kartu biar muat tombolnya naik */
-#karya .gallery-container {
-    transform: scale(0.85) !important; /* Perkecil dikit lagi biar lega */
-    margin-bottom: 0 !important;
-}
+.works-list::-webkit-scrollbar { display: none !important; }
 </style>
 </head>
 <body>
