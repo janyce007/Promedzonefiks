@@ -75,7 +75,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('bg.jpg') no-repeat center center;
+    background: url('background.jpg/Promed - 4.JPG') no-repeat center center;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -393,7 +393,7 @@ button.step:hover {
 .works-list::-webkit-scrollbar { display: none; }
 .work-card-wrapper { flex: 0 0 auto; scroll-snap-align: center; width: 200px; cursor: pointer; position: relative; transition: transform 0.3s ease; }
 .work-card { width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background-color: white; transition: box-shadow 0.3s ease; }
-.work-card-image { width: 100%; height: 280px; background: var(--accent-2); display: flex; align-items: center; justify-content: center; color: var(--text-dark); font-weight: 600; font-size: 14px; object-fit: cover; }
+.work-card-image { width: 100%; height: 280px; background: transparent; display: flex; align-items: center; justify-content: center; color: var(--text-dark); font-weight: 600; font-size: 14px; object-fit: cover; }
 .work-card-caption { padding: 10px 8px; text-align: center; font-size: 14px; font-weight: 600; color: var(--text-dark); }
 .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(22, 82, 255, 0.7); color: white; border: none; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 20; font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background 0.3s, opacity 0.3s; }
 .nav-arrow:hover { background: var(--accent); }
@@ -1295,15 +1295,15 @@ const worksData = [
     { id: 'cp_wherever', title: 'Wherever The Wind Take Us', category: 'Charmless Pals - Musik', type: 'music', status: 'Aktif', description: 'Lagu Wherever The Wind Take Us oleh Charmless Pals.', mediaType: 'music', youtubeId: 'PbQ9KoLncWc', youtubeLink: 'https://youtu.be/PbQ9KoLncWc', igLink: 'https://www.instagram.com/charmlesspals/' },
 
     // -- KARYA LAINNYA (GAME/FILM) TETAP ADA --
-    { id: 'fate', title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film', imageSrc: 'c31225f1-6d8d-4d35-8828-3aa94868d45b.JPG' },
-    { id: 'baduy', title: 'Baduy', category: 'Film Dokumenter', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film dokumenter karya mahasiswa Produksi Media UI.', mediaType: 'film' },
-    { id: 'Drawn To You', title: 'Drawn To You', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', igLink: null },
-    { id: 'Kita Perbaiki', title: 'Kita Perbaiki', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', mediaType: 'film', igLink: null },
-    { id: 'Masih Bingung', title: 'Masih Bingung', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', mediaType: 'film', igLink: null },
-    { id: 'room308', title: 'Room 308', category: 'Game - Horror', type: 'game', status: 'Selesai', description: 'Game horror buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
-    { id: 'ard', title: 'Animal Resource Department', category: 'Game - Simulasi', type: 'game', status: 'Selesai', description: 'Game simulasi buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
-    { id: 'lodayaconquest', title: 'Lodaya Conquest', category: 'Game - Adventure', type: 'game', status: 'Selesai', description: 'Game adventure buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
-    { id: 'pilahsampah', title: 'Yuk Pilah Sampah Game Edukasi', category: 'Game - Edukasi', type: 'game', status: 'Rilis di Play Store', description: 'Game edukasi mengenai sampah.', mediaType: 'game', playStoreLink: 'https://play.google.com/store/apps/details?id=com.oxlab.yukpilahsampah' },
+    { id: 'fate', imageSrc: "fotoposter.jpg/IMG_5358.JPG", title: 'Fate', category: 'Film Cerita Pendek', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film cerita pendek karya mahasiswa Produksi Media UI.', mediaType: 'film' },
+    { id: 'baduy', imageSrc: "fotoposter.jpg/IMG_5359.JPG", title: 'Baduy', category: 'Film Dokumenter', type: 'film', status: 'Pemenang VUIFILMFEST 2024', description: 'Film dokumenter karya mahasiswa Produksi Media UI.', mediaType: 'film' },
+    { id: 'Drawn To You', imageSrc: "fotoposter.jpg/IMG_5360.JPG", title: 'Drawn To You', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', igLink: null },
+    { id: 'Kita Perbaiki', imageSrc: "fotoposter.jpg/IMG_5361.JPG", title: 'Kita Perbaiki', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', mediaType: 'film', igLink: null },
+    { id: 'Masih Bingung', imageSrc: "fotoposter.jpg/IMG_5362.JPG", title: 'Masih Bingung', category: 'Film', type: 'film', status: 'Film pendek', description: 'Film pendek buatan mahasiswa Produksi Media UI.', mediaType: 'film', igLink: null },
+    { id: 'room308', imageSrc: "fotoposter.jpg/ba794e24-0a2b-4589-ba82-854458821375 2.jpg", title: 'Room 308', category: 'Game - Horror', type: 'game', status: 'Selesai', description: 'Game horror buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
+    { id: 'ard', imageSrc: "fotoposter.jpg/b343ac76-188e-495a-a112-1880f2aed3d0 2.jpg", title: 'Animal Resource Department', category: 'Game - Simulasi', type: 'game', status: 'Selesai', description: 'Game simulasi buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
+    { id: 'lodayaconquest', imageSrc: "fotoposter.jpg/Untitled design.zip - 15.JPG", title: 'Lodaya Conquest', category: 'Game - Adventure', type: 'game', status: 'Selesai', description: 'Game adventure buatan mahasiswa Produksi Media UI.', mediaType: 'game' },
+    { id: 'pilahsampah', imageSrc:"fotoposter.jpg/Untitled design.zip - 16.JPG", title: 'Yuk Pilah Sampah Game Edukasi', category: 'Game - Edukasi', type: 'game', status: 'Rilis di Play Store', description: 'Game edukasi mengenai sampah.', mediaType: 'game', playStoreLink: 'https://play.google.com/store/apps/details?id=com.oxlab.yukpilahsampah' },
 ];
 
 const worksList = document.getElementById('worksList');
@@ -1588,7 +1588,7 @@ const eventsData = [
     { id: 'etopia', name: 'ETOPIA', dates: [new Date('2025-11-05')], monthDisplay: 'November', place: 'Auditorium Pusgiwa UI', organizer: 'Departemen Olahraga HIMPRODIA UI', description: 'Etopia adalah sebuah acara tournament esports.', ig: 'etopia.ui', igLink: 'https://www.instagram.com/etopia.ui?igsh=MTN6c2doaHRtN3A1ZQ==' },
     { id: 'promed_mengajar', name: 'Promed Mengajar', dates: [new Date('2025-11-10'), new Date('2025-11-12')], monthDisplay: 'November', place: 'SMA Pemuka Depok', organizer: 'Departemen Sosial dan Masyarakat', description: 'Promed Mengajar merupakan program kerja pengabdian masyarakat.', ig: 'promed.megajar', igLink: 'https://www.instagram.com/mediaexperience.ui?igsh=ZTZuMno0bm03cWk1' },
     { id: 'media_experience', name: 'Media Experience', dates: [new Date('2025-11-20')], monthDisplay: 'November', place: 'Makara Art Center', organizer: 'Departemen Seni Budaya', description: 'Media Experience adalah sebuah ajang apresiasi karya mahasiswa.', ig: 'mediaexperience.ui', igLink: 'https://www.instagram.com/mediaexperience.ui?igsh=ZTZuMno0bm03cWk1' },
-    { id: 'promates_market', name: 'Promates Market', dates: [new Date('2025-11-20')], monthDisplay: 'November', place: 'TBA', organizer: 'Departemen Ekonomi', description: 'Promates Market merupakan pasar preloved.', ig: 'promates.market', igLink: 'https://www.instagram.com/promates.market?igsh=MTRkdndycnJ2cDd0ZQ==' }
+    { id: 'promates_market', name: 'Promates Market', dates: [new Date('2025-11-20')], monthDisplay: 'November', place: 'Kantin Vokasi Lantai 2', organizer: 'Departemen Ekonomi', description: 'Promates Market merupakan pasar preloved.', ig: 'promates.market', igLink: 'https://www.instagram.com/promates.market?igsh=MTRkdndycnJ2cDd0ZQ==' }
 ];
 
 const monthNames = ["Juli", "Agustus", "September", "Oktober", "November", "Desember"];
