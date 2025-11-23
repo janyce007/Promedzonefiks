@@ -55,7 +55,10 @@ body{
 .page{
   position:absolute; 
   top: 0; left: 0; width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
   opacity:0;
   pointer-events:none;
   transition:opacity .8s cubic-bezier(0.25, 1, 0.5, 1), transform .8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -215,8 +218,9 @@ button.step:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 40px 20px;
-    min-height: 100vh;
+    padding: 100px 20px 40px;
+    min-height: auto;
+    height: fit-content;
 }
 .neu-calendar-container {
     position: relative;
@@ -266,11 +270,12 @@ button.step:hover {
 
 /* DETAIL PAGES GENERIC */
 #event-detail, #work-detail, #promed-nav, #promed-about-detail, #promed-peminatan-detail, #peminatan-single-detail-temp, #dosen, #fasilitas, #full-roadmap {
-    padding: 80px 20px;
-    min-height: 100vh;
+    padding: 0 20px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
 }
 .detail-card { max-width: 700px; width: 100%; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; margin-top: 30px; }
@@ -296,7 +301,7 @@ button.step:hover {
 #dosen { padding: 0; }
 .dosen-arch-wrapper { 
     width: 100%; 
-    height: 100vh; 
+    height: 100%; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -304,7 +309,7 @@ button.step:hover {
     /* UPDATED BACKGROUND TO BLUE GRADIENT (SAME AS ABOUT US) */
     background: linear-gradient(135deg, var(--bg-about) 0%, #2a4cb8 40%, #3b6aff 100%); 
     color: white; 
-    padding: 40px 20px; 
+    padding: 20px; 
     position: relative; 
     overflow: hidden; 
 }
